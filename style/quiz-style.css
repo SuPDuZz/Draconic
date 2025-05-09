@@ -12,7 +12,7 @@ main {
 
 .symbol {
     display: inline-block;
-    background-image: url('/images/draconicnoheader.png');
+    background-image: url('./images/draconicnoheader.png');
     background-repeat: no-repeat;
     background-size: 600% 700%;
     width: 101px;
