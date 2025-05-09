@@ -14,7 +14,7 @@
 .left-image {
     width: 606px; /* 6 x 101px */
     height: 700px; /* 7 x 101px */
-    background-image: url('../images/draconicnoheader.png');
+    background-image: url('/images/draconicnoheader.png');
     display: grid;
     grid-template-columns: repeat(6, 101px);
     grid-template-rows: repeat(7, 101px);
@@ -42,7 +42,7 @@
 .symbol-preview {
     width: 101px;
     height: 129px;
-    background-image: url('../images/draconic-adjusted.png');
+    background-image: url('/images/draconic-adjusted.png');
     background-size: 606px 903px; /* full size of sprite sheet */
     border: 1px solid #444;
 }
