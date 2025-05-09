@@ -1,0 +1,46 @@
+﻿body {
+    font-family: sans-serif;
+    text-align: center;
+    background: #f3e7df;
+}
+
+main {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.symbol {
+    display: inline-block;
+    background-image: url('./images/draconicnoheader.png');
+    background-repeat: no-repeat;
+    background-size: 600% 700%;
+    width: 101px;
+    height: 101px;
+    margin: 0px auto;
+} 
+
+
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.correct {
+    background-color: #c8f7c5;
+}
+
+.incorrect {
+    background-color: #f8c6c6;
+}
+
+#next-btn {
+    display: none;
+}
