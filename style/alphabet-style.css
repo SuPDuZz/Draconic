@@ -46,3 +46,18 @@
     background-size: 606px 903px; /* full size of sprite sheet */
     border: 1px solid #444;
 }
+
+#play-sound {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#play-sound:hover {
+    background-color: #666;
+}
