@@ -38,7 +38,7 @@ const playButton = document.getElementById('play-sound');
 if (playButton) {
     playButton.addEventListener('click', () => {
         if (selectedRow !== null && selectedCol !== null) {
-            const audio = new Audio(`../sounds/symbol-${selectedRow}-${selectedCol}.mp3`);
+            const audio = new Audio(`./sounds/symbol-${selectedRow}-${selectedCol}.mp3`);
             audio.play().catch(err => console.error("Lyd kunne ikke afspilles:", err));
         } else {
             alert("Vælg et tegn i alfabetet først.");
