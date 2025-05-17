@@ -10,7 +10,7 @@ const ROWS = 7;
 let selectedRow = null;
 let selectedCol = null;
 
-// Byg grid'et og tilføj klik-funktioner
+// builds the grid with 6 coloumns and 7 rows
 for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
         const cell = document.createElement('div');
@@ -18,22 +18,33 @@ for (let row = 0; row < ROWS; row++) {
         cell.dataset.row = row;
         cell.dataset.col = col;
 
+        // what happens when the grids are clicked
         cell.addEventListener('click', () => {
             const x = -(col * CELL_WIDTH);
             const SPRITE_CELL_HEIGHT = 129;
             const y = -(row * SPRITE_CELL_HEIGHT);
             preview.style.backgroundPosition = `${x}px ${y}px`;
 
-            // Gem hvilken celle der er valgt
+            // save which cell is chosen
             selectedRow = row;
             selectedCol = col;
+
+            // Display the corresponding explanation text for the symbols
+            const key = `${row}-${col}`;
+            const data = gridData[key];
+
+            if (data) {
+                document.getElementById('info-text').innerHTML = data.content;
+            } else {
+                document.getElementById('info-text').innerHTML = "<p>No data for this cell.</p>";
+            }
         });
 
         grid.appendChild(cell);
     }
 }
 
-// Afspil lyd baseret på valgt celle
+// plays a sound file corresponding to the current chosen cell
 const playButton = document.getElementById('play-sound');
 if (playButton) {
     playButton.addEventListener('click', () => {

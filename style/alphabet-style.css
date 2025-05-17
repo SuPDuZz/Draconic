@@ -17,26 +17,37 @@
     background-image: url('../images/draconicnoheader.png');
     display: grid;
     grid-template-columns: repeat(6, 101px);
-    grid-template-rows: repeat(7, 101px);
+    grid-template-rows: repeat(7, 100px);
     position: relative;
 }
 
 .grid-cell {
     width: 101px;
-    height: 101px;
+    height: 100px;
     cursor: pointer;
     background: rgba(255, 255, 255, 0); /* still invisible */
     position: relative;
     z-index: 1;
 }
 
+.right-side {
+    width: 300px;
+    height: 300px;
+    align-self: auto;
+}
 
 .right-image {
     width: 300px;
     height: 129px;
     display: flex;
     align-self: auto;
-    justify-content: center;
+}
+
+.right-text {
+    width: 300px;
+    height: 171px;
+    display: flex;
+    align-self: auto;
 }
 
 .symbol-preview {
@@ -48,6 +59,8 @@
 }
 
 #play-sound {
+    height: 129px;
+    width: 199px;
     margin-top: 0px;
     padding: 10px 15px;
     font-size: 16px;
