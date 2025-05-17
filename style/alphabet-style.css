@@ -5,7 +5,7 @@
 
 .alphabet-container {
     display: flex;
-    height: 100vh;
+    height: 80vh;
     vertical-align: middle;
     justify-content: center;
     gap: 20px;
