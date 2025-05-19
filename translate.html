@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiktivt Alfabet til IPA</title>
+    <link rel="stylesheet" href="./style/translate-style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Draconic &rarr; IPA-Translator</h1>
+        <div id="buttons" class="button-grid"></div>
+        <textarea id="inputText" class="custom-font" placeholder="Type your Draconic script here..."></textarea>
+        <button onclick="translateText()">Translate</button>
+        <textarea id="outputText" readonly placeholder="Romanized output here..."></textarea>
+    </div>
+    <script src="./javascript/translate-script.js"></script>
+
+    <div id="footer" style="bottom: 0; left:0;"></div>
+    <script src="./shared/load-footer.js"></script>
+</body>
+</html>
