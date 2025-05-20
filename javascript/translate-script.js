@@ -59,7 +59,7 @@ const alphabetMap = {
     '\uE025': 'm',
     '\uE026': 'n',
     '\uE027': 'ŋ',
-    '\uE028': 'q̇ħóll',
+    '\uE028': '^',
     ' ': ' ',
 };
 
@@ -67,8 +67,26 @@ function translateText() {
     const input = document.getElementById('inputText').value;
     let output = '';
 
-    for (let char of input) {
-        output += alphabetMap[char] || char; 
+    const baseVowels = ['e', 'æ', 'y', 'a', 'o', 'u', 'i', 'ē', 'ā', 'ō', 'ū', 'ī'];
+    const accentedVowels = ['é', 'ǽ', 'ý', 'á', 'ó', 'ú', 'í', 'ê', 'â', 'ô', 'û', 'î'];
+
+    for (let i = 0; i < input.length; i++) {
+        const char = input[i];
+
+        if (char === '\uE028') {
+            // Get the last character from the output
+            const lastChar = output.slice(-1);
+            const index = baseVowels.indexOf(lastChar);
+            if (index !== -1) {
+                // Replace the last character with the accented vowel
+                output = output.slice(0, -1) + accentedVowels[index];
+            } else {
+                // If not a recognized vowel, just append the '^'
+                output += '^';
+            }
+        } else {
+            output += alphabetMap[char] || char;
+        }
     }
 
     document.getElementById('outputText').value = output;

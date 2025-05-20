@@ -1,6 +1,6 @@
 const pages = [
     { name: 'Draconic Quiz', file: './quiz.html' },
-    { name: 'Alphabet', file: './alphabet.html' }
+    { name: 'Alphabet', file: './alphabet.html' },
     { name: 'Draconic to Romanized', file: './translate.html' }
 ];
 
