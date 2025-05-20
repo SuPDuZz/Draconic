@@ -81,3 +81,19 @@ button:hover {
     font-family: 'DraconicFon', monospace;
     color: darkred;
 }
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    flex: 1;
+    background-color: #6c757d;
+}
+
+.toggle-buttons button:hover {
+    background-color: #5a6268;
+}

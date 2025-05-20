@@ -63,12 +63,12 @@ const alphabetMap = {
     ' ': ' ',
 };
 
+const baseVowels = ['e', 'æ', 'y', 'a', 'o', 'u', 'i', 'ē', 'ā', 'ō', 'ū', 'ī'];
+const accentedVowels = ['é', 'ǽ', 'ý', 'á', 'ó', 'ú', 'í', 'ê', 'â', 'ô', 'û', 'î'];
+
 function translateText() {
     const input = document.getElementById('inputText').value;
     let output = '';
-
-    const baseVowels = ['e', 'æ', 'y', 'a', 'o', 'u', 'i', 'ē', 'ā', 'ō', 'ū', 'ī'];
-    const accentedVowels = ['é', 'ǽ', 'ý', 'á', 'ó', 'ú', 'í', 'ê', 'â', 'ô', 'û', 'î'];
 
     for (let i = 0; i < input.length; i++) {
         const char = input[i];
@@ -91,3 +91,69 @@ function translateText() {
 
     document.getElementById('outputText').value = output;
 }
+
+function setMode(mode) {
+    const title = document.getElementById('translatorTitle');
+    const draconicSection = document.getElementById('draconicSection');
+    const romanizedSection = document.getElementById('romanizedSection');
+
+    if (mode === 'draconic') {
+        title.textContent = 'Draconic → Romanized';
+        draconicSection.style.display = 'block';
+        romanizedSection.style.display = 'none';
+    } else {
+        title.textContent = 'Romanized → Draconic';
+        draconicSection.style.display = 'none';
+        romanizedSection.style.display = 'block';
+    }
+}
+
+// Reverse map
+const reverseAlphabetMap = {};
+for (const [key, value] of Object.entries(alphabetMap)) {
+    if (!reverseAlphabetMap[value]) {
+        reverseAlphabetMap[value] = key;
+    }
+}
+
+function reverseTranslateText() {
+    let input = document.getElementById('reverseInputText').value;
+    let output = '';
+
+    const romanKeys = Object.keys(reverseAlphabetMap).sort((a, b) => b.length - a.length);
+
+    while (input.length > 0) {
+        const char = input[0];
+
+        // Handle accented vowels
+        const accIndex = accentedVowels.indexOf(char);
+        if (accIndex !== -1) {
+            const base = baseVowels[accIndex];
+            if (reverseAlphabetMap[base] && reverseAlphabetMap['^']) {
+                output += reverseAlphabetMap[base] + reverseAlphabetMap['^'];
+                input = input.slice(1);
+                continue;
+            }
+        }
+
+        // Try matching full symbols
+        let matched = false;
+        for (const key of romanKeys) {
+            if (input.startsWith(key)) {
+                output += reverseAlphabetMap[key];
+                input = input.slice(key.length);
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
+            // If no match, just copy the char (or optionally skip it)
+            output += input[0];
+            input = input.slice(1);
+        }
+    }
+
+    document.getElementById('reverseOutputText').value = output;
+}
+

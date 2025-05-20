@@ -8,14 +8,34 @@
 </head>
 <body>
     <div class="container">
-        <h1>Draconic &rarr; Romanized</h1>
-        <div id="buttons" class="button-grid"></div>
-        <textarea id="inputText" class="custom-font" placeholder="Type your Draconic script here..."></textarea>
-        <button onclick="translateText()">Translate</button>
-        <textarea id="outputText" readonly placeholder="Romanized output here..."></textarea>
-    </div>
-    <script src="./javascript/translate-script.js"></script>
+        <!---- Title ---->
+        <h1 id="translatorTitle">Draconic → Romanized</h1>
 
+        <!---- Toggle-buttons ---->
+        <div class="toggle-buttons">
+            <button onclick="setMode('draconic')">Draconic → Romanized</button>
+            <button onclick="setMode('romanized')">Romanized → Draconic</button>
+        </div>
+
+        <!---- Draconic to Romanized ---->
+        <div id="draconicSection">
+            <div id="buttons" class="button-grid"></div>
+            <textarea id="inputText" class="custom-font" placeholder="Type your Draconic script here..."></textarea>
+            <button onclick="translateText()">Translate</button>
+            <textarea id="outputText" readonly placeholder="Romanized output here..."></textarea>
+        </div>
+
+        <!---- Romanized to Draconic ---->
+        <div id="romanizedSection" style="display: none;">
+            <textarea id="reverseInputText" placeholder="Type Romanized text here..."></textarea>
+            <button onclick="reverseTranslateText()">Translate to Draconic</button>
+            <textarea id="reverseOutputText" class="custom-font" readonly placeholder="Draconic output here..."></textarea>
+        </div> 
+    </div>
+
+    <script src="./javascript/translate-script.js"></script>
+    
+    <!---- Footer ---->
     <div id="footer" style="bottom: 0; left:0;"></div>
     <script src="./shared/load-footer.js"></script>
 </body>
