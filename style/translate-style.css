@@ -47,7 +47,8 @@ textarea {
     width: 100%;
     height: 150px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     font-size: 2rem;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -96,4 +97,13 @@ button:hover {
 
 .toggle-buttons button:hover {
     background-color: #5a6268;
+}
+
+.translateButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.copyButton {
+    margin-top: 10px;
 }

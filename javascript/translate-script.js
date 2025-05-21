@@ -134,3 +134,29 @@ function reverseTranslateText() {
     document.getElementById('reverseOutputText').value = output;
 }
 
+const toDiscordFormat = {
+    '\uE000': ':t_:', '\uE001': ':c_:', '\uE002': ':k_:', '\uE003': ':q_:', '\uE004': ':Q_:', '\uE005': ':__:',
+    '\uE006': ':tr:', '\uE007': ':s_:', '\uE008': ':kx:', '\uE009': ':qX:', '\uE00A': ':qH:', '\uE00B': ':QH:',
+    '\uE00C': ':d_:', '\uE00D': ':z_:', '\uE00E': ':g_:', '\uE00F': ':f_:', '\uE010': ':th:', '\uE011': ':ll:',
+    '\uE012': ':x_:', '\uE013': ':X_:', '\uE014': ':h_:', '\uE015': ':XH:', '\uE016': ':H_:', '\uE017': ':r_:', 
+    '\uE018': ':l_:', '\uE019': ':e_:', '\uE01A': ':ae:', '\uE01B': ':y_:', '\uE01C': ':a_:', '\uE01D': ':o_:', 
+    '\uE01E': ':u_:', '\uE01F': ':i_:', '\uE020': ':ee:', '\uE021': ':aa:', '\uE022': ':oo:', '\uE023': ':uu:', 
+    '\uE024': ':ii:', '\uE025': ':m_:', '\uE026': ':n_:', '\uE027': ':ng~1:', '\uE028': ':_pyr:', ' ': '   ',
+};
+
+function copyTranslatedDraconic(elementId) {
+    const text = document.getElementById(elementId).value;
+    let translated = '';
+
+    for (const char of text) {
+        if (toDiscordFormat[char]) {
+            translated += toDiscordFormat[char];
+        } else {
+            translated += char; // Leave unchanged if no match
+        }
+    }
+
+    navigator.clipboard.writeText(translated)
+        .then(() => alert("Translated text copied to clipboard!"))
+        .catch(err => alert("Failed to copy text: " + err));
+}

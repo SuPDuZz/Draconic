@@ -21,7 +21,8 @@
         <div id="draconicSection">
             <div id="buttons" class="button-grid"></div>
             <textarea id="inputText" class="custom-font" placeholder="Type your Draconic script here..."></textarea>
-            <button onclick="translateText()">Translate</button>
+            <button onclick="copyTranslatedDraconic('inputText')" class="copyButton">Copy in Discord format</button>
+            <button onclick="translateText()" class="translateButton">Translate</button>
             <textarea id="outputText" readonly placeholder="Romanized output here..."></textarea>
         </div>
 
@@ -29,8 +30,9 @@
         <div id="romanizedSection" style="display: none;">
             <div id="buttons2" class="button-grid"></div>
             <textarea id="reverseInputText" placeholder="Type Romanized text here..."></textarea>
-            <button onclick="reverseTranslateText()">Translate to Draconic</button>
+            <button onclick="reverseTranslateText()" class="translateButton">Translate to Draconic</button>
             <textarea id="reverseOutputText" class="custom-font" readonly placeholder="Draconic output here..."></textarea>
+            <button onclick="copyTranslatedDraconic('reverseOutputText')" class="copyButton">Copy in Discord format</button>
         </div> 
     </div>
 
