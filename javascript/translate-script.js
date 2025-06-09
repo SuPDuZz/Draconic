@@ -70,7 +70,7 @@ function setMode(mode) {
 }
 
 // Buttons for Roman to Draconic
-const romanCharacters = ['q̇', '`', 'χ', 'ħ', 'ŋ', 'æ', 'ē', 'ā', 'ō', 'ū', 'ī', 'é', 'ǽ', 'ý', 'á', 'ó', 'ú', 'í', 'ê', 'â', 'ô', 'û', 'î'];
+const romanCharacters = ['q̇', '´', 'χ', 'ħ', 'ŋ', 'æ', 'ē', 'ā', 'ō', 'ū', 'ī', 'é', 'ǽ', 'ý', 'á', 'ó', 'ú', 'í', 'ê', 'â', 'ô', 'û', 'î'];
 const buttonsContainer2 = document.getElementById('buttons2');
 
 romanCharacters.forEach(char => {
