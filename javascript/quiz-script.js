@@ -17,7 +17,7 @@ function generateQuestion() {
     const symbols = document.querySelectorAll('.symbol');
     symbols.forEach(sym => {
         sym.style.backgroundImage = "url('./images/draconicnoheader.png')";
-        sym.style.Height = "101px";
+        sym.style.height = "101px";
     });
 
     const correct = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
@@ -88,7 +88,7 @@ function handleAnswer(isCorrect, btn) {
     const symbols = document.querySelectorAll('.symbol');
     symbols.forEach(sym => {
         sym.style.backgroundImage = "url('./images/draconic-adjusted.png')";
-        sym.style.Height = "129px";
+        sym.style.height = "129px";
     });
 
     /*btn.classList.add(isCorrect ? 'correct' : 'incorrect');*/
