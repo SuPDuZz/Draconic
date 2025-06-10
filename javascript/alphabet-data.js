@@ -39,7 +39,7 @@
     },
     //row 2
     "2-0": {
-        content: `<p>d is pronounced like a TH in this /θ/.</p>`
+        content: `<p>d is pronounced like a TH in this /ð/.</p>`
     },
     "2-1": {
         content: `<p>z is pronounced /z/.</p>`
@@ -51,7 +51,7 @@
         content: `<p>f is pronounced very simmilar to an f in english but instead of your lips touching your teeth /f/ your two lips touch /ɸ/.</p>`
     },
     "2-4": {
-        content: `<p>th is pronounced like the 'th' in thin /ð/.</p>`
+        content: `<p>th is pronounced like the 'th' in thin /θ/.</p>`
     },
     "2-5": {
         content: `<p>Double 'l' is pronounced like the welsh double L /ɬ/.</p>`
