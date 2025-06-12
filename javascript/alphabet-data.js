@@ -16,7 +16,7 @@
         content: `<p>An epiglotal plosive /ʡ/, kind of like the q sound but further back in the throat. If you want to get better at pronouncing this look up aryepiglottic folds, and mess around with your throat muscles to figure out how to contract them.</p>`
     },
     "0-5": {
-        content: `<p>The apostrophe is just pronounced /ʔ/, kind og like how some british people pronounce their t's. like how "bottle of water" stereotypically is pronounced "bo'l o wo'uh". It can also be found in some american dialects were words such as "button" or "mountain" become "bu'n" and "mou'n".</p>`
+        content: `<p>The apostrophe is just pronounced /ʔ/, kind of like how some british people pronounce their t's. like how "bottle of water" stereotypically is pronounced "bo'l o wo'uh". It can also be found in some american dialects were words such as "button" or "mountain" become "bu'n" and "mou'n".</p>`
     },
     //row 1
     "1-0": {
