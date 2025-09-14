@@ -1,0 +1,101 @@
+main {
+  margin-top: 8vh;
+  transition: all 0.4s ease-in-out;
+}
+p {
+  padding-top: 5px;
+}
+button {
+  background-color: transparent;
+}
+
+.alphabet-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alphabet {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.alphabet > img{
+  display: block;
+  height: 80vh;
+  width: auto;
+
+  border-width: 0px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+
+  margin-top: 0px;
+  margin-right: 0px;
+}
+
+.grid-button {
+  border: 1px solid white;
+}
+.grid-button:hover {
+  background-color: rgba(147, 197, 253, 0.5); /* Tailwind's blue-300/50 */
+}
+
+/* Optional: Style the modal close button */
+#modal button.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+#modal {
+  display: flex; 
+  display: none; 
+  position: fixed; 
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; 
+  z-index: 50; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: rgba(0,0,0, 0.2); 
+}
+.modalContent {
+  position: relative; 
+  padding: 1.5rem; 
+  border-radius: 0.5rem; 
+  max-width: 100%; 
+  background-color: #ffffff; 
+  width: 300px;
+}
+
+#modalText {
+  font-size: 12px;
+  margin-bottom: 1rem;
+}
+
+#modalImage {
+  margin-bottom: 1rem; 
+  border-radius: 0.25rem; 
+  width: 101px; 
+  height: 129px;
+  background-image: url('../assets/images/draconic-adjusted.png');
+  background-size: 606px 903px;
+}
+.modalClose {
+  position: absolute; 
+  top: 0.5rem; 
+  right: 0.8rem; 
+  color: #6B7280;
+  border: none;
+}.modalClose:hover {
+  color: #000000; 
+}
