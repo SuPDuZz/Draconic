@@ -1,6 +1,6 @@
 Promise.all([
-  fetch('/shared/header.html').then(res => res.text()),
-  fetch('/shared/footer.html').then(res => res.text())
+  fetch('./shared/header.html').then(res => res.text()),
+  fetch('./shared/footer.html').then(res => res.text())
 ]).then(([header, footer]) => {
   document.getElementById('header-placeholder').innerHTML = header;
   document.getElementById('footer-placeholder').innerHTML = footer;

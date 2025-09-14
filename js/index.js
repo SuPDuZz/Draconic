@@ -33,7 +33,7 @@ function openModal(index) {
 
   relCol = content.column;
   relRow = content.row;
-  soundPath = `../assets/sound/symbol-${relRow}-${relCol}.mp3`;
+  soundPath = `./assets/sound/symbol-${relRow}-${relCol}.mp3`;
 
   x = -(relCol * CELL_WIDTH);
   y = -(relRow * CELL_HEIGHT);
