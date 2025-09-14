@@ -29,7 +29,11 @@ for (let row = 0; row < ROWS; row++){
 function openModal(index) {
   const content = alphabetMap[index] || alphabetMap[0];
   modalText.textContent = content.text;
-  modalAllophone.textContent = content.allophones;
+  if (content.allophones === "none") {
+    modalAllophone.style.display = "none"
+  } else {
+    modalAllophone.textContent = content.allophones;
+  }
   document.getElementById("modal").style.display="flex";
 
   relCol = content.column;
