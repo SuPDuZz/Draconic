@@ -32,6 +32,7 @@ function openModal(index) {
   if (content.allophones === "none") {
     modalAllophone.style.display = "none"
   } else {
+    modalAllophone.style.display = "block"
     modalAllophone.textContent = content.allophones;
   }
   document.getElementById("modal").style.display="flex";
