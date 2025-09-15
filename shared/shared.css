@@ -34,10 +34,16 @@ h1 {
 }
 
 .links{
-    color: #2563eb;
+    font-family: "Dancing Script", cursive;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-style: normal;
     text-align: center;
     flex: 1;
+    text-decoration: none;
+    color: rgb(10, 20, 10);
 }
 .links:hover {
     text-decoration: underline;
+    color: #2563eb;
 }

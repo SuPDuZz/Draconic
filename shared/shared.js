@@ -5,28 +5,33 @@ Promise.all([
   document.getElementById('header-placeholder').innerHTML = header;
   document.getElementById('footer-placeholder').innerHTML = footer;
   
-  let lastScrollTop = 0;
+  let lastScroll = 0;
   const tolerance = 5;
   const navbar = document.querySelector(".navbar");
   const main = document.querySelector(".main");
 
   window.addEventListener("scroll", () => {
-    let scrollTop = window.scrollY || document.documentElement.scrollTop;
-    if (Math.abs(scrollTop - lastScrollTop)> tolerance) {
-      if (40 > scrollTop && scrollTop > lastScrollTop) {
+    let scroll = window.scrollY || document.documentElement.scrollTop;
+    let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (Math.abs(scroll - lastScroll)> tolerance) {
+      
+      if (40 > scroll || scroll < lastScroll) {
         navbar.style.top = "0";
         main.style.marginTop = "8vh";
       }
-      else if (scrollTop > lastScrollTop) {
+      else if (scroll > lastScroll && scroll < maxScroll) {
         // scrolling down
         navbar.style.top = "-8vh"; // hide (adjust depending on navbar height)
         main.style.marginTop = "0";
-      } else {
-        // scrolling up
-        navbar.style.top = "0";
-        main.style.marginTop = "8vh";
       }
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // avoid negative values
-      }
-});
+      
+      lastScroll = scroll <= 0 ? 0 : scroll; // avoid negative values
+    }
+
+    if (scroll >= maxScroll) {
+      navbar.style.top = "0";
+      main.style.marginTop = "8vh";
+    }
+  });
 });
