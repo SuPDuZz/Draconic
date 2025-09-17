@@ -51,6 +51,7 @@ function openModal(index) {
 
   if (relRow == '6' && relCol == '4') { //if pyric symbol
     modalImage.style.display = "block"; // show picture
+    allophoneTable.style.display = "block";
     pyricAllophone(content); // runs allophone function
   } 
   else if (content.name == 'more') { // if last square (more)
