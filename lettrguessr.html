@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/lettrguessr.css">
+    <script src="./js/lettrguessr.js" defer></script>
+    <title>Draconic LettrGuessr by Lirox</title>
+</head>
+<body>
+    <h1 class="textcenter">Draconic LettrGuessr by LiroxDeYamon</h1>
+    <div class="wrap">
+        <div class="card">
+            <h2>What's this?</h2>
+            <img id="lettr_image">
+            <div class="typein">
+                <input id="guess_field" type="text" maxlength="2" placeholder="Type romanized here">
+                <button id="confirm_button">Skip</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Attemps</h2>
+            <ul id="attempts_list"></ul>
+        </div>
+    </div>
+</br>
+    <div class="wrap" id="slim">
+        <div class="card">
+            <h2 id="timer_text">Timer</h2>
+            <progress id="timer_bar" value="0" max="100"></progress>
+        </div>
+        <div class="card">
+            <h2 id="misses_text">Errors</h2>
+            <progress id="misses_bar" value="0" max="100"></progress>
+        </div>
+    </div>
+</br>
+    <div class="wrap" id="slim">
+        <div class="card">
+            <h2 id="winrate_text">Winrate</h2>
+            <progress id="winrate_bar" value="0" max="100"></progress>
+        </div>
+    </div>
+</br>
+    <div class="wrap">
+        <div class="card">
+            <h2>Settings</h2>
+            <div class="setting">
+                <div class="setting">
+                    <h2>HUE</h2>
+                    <input type="range" id="accent_hue_slide" min="0" max="360">
+                </div>
+                <div class="setting">
+                    <h2>Loop trough colors</h2>
+                    <input type="checkbox" id="accent_hue_check" checked>
+                </div>
+            </div>
+            <div class="setting">
+                <h2>Timer</h2>
+                <input type="range" id="timer_slide" min="0" max="30" value="0">
+            </div>
+            <div class="setting">
+                <h2>Max Misses</h2>
+                <input type="range" id="misses_slide" min="0" max="10" value="0">
+            </div>
+            <div class="setting">
+                <div class="setting">
+                    <h2>Include vowels</h2>
+                    <input type="checkbox" id="vowels_check" checked>
+                </div>
+                <div class="setting">
+                    <h2>Include pyric vowels</h2>
+                    <input type="checkbox" id="pyric_vowels_check" checked>
+                </div>
+            </div>
+            <div class="setting">
+                <div class="setting">
+                    <h2>Include consonants</h2>
+                    <input type="checkbox" id="consonants_check" checked>
+                </div>
+                <div class="setting">
+                    <h2>Include pyric consonants</h2>
+                    <input type="checkbox" id="pyric_consonants_check" checked>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

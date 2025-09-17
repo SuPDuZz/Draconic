@@ -99,3 +99,9 @@ button {
 }.modalClose:hover {
   color: #000000; 
 }
+
+#footer-placeholder {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
