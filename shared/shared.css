@@ -4,7 +4,7 @@
     font-size: 0.875rem;
     line-height: 1.25rem; 
     text-align: center; 
-    background-color: #ffffff; 
+    background-color: #eececd; 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); 
     font-size: 16px;
     display: flex;
@@ -39,14 +39,13 @@ h1 {
     position: fixed;
     top: 0;
     left: 0;
-    background: #ffffff;
+    background: #d16d6a;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
     margin-left: 0px;
 }
 
 .links{
-    font-family: "Dancing Script", cursive;
     font-weight: 500;
     font-optical-sizing: auto;
     font-style: normal;
@@ -57,5 +56,6 @@ h1 {
 }
 .links:hover {
     text-decoration: underline;
-    color: #2563eb;
+    color: #000000;
+    font-weight: bold;
 }

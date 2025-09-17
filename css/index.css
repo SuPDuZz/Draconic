@@ -1,12 +1,29 @@
+body {
+  background-image: url(../assets/images/parchment.jpg);
+  background-repeat: repeat;
+  position: relative;
+}
 main {
   margin-top: 8vh;
   transition: all 0.4s ease-in-out;
 }
+.before {
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000000;
+  background-color: #eececd;
+  
+  margin-top: 10vh;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  padding: 10px;
+}
 p {
   padding-top: 5px;
-}
-button {
-  background-color: transparent;
+  margin: 0px;
 }
 
 .alphabet-wrapper {
@@ -42,13 +59,43 @@ button {
 }
 
 .grid-button {
-  border: 1px solid white;
+  border: 1px solid transparent;
+  background-color: transparent;
 }
 .grid-button:hover {
-  background-color: rgba(147, 197, 253, 0.5); /* Tailwind's blue-300/50 */
+  background-color: rgba(147, 197, 253, 0.5); 
 }
 
-/* Optional: Style the modal close button */
+#lessons {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.lesson-button {
+  border: solid, 2px, #000000;
+  background-color: #d16d6a;
+  border-radius: 10px;
+  margin-top: 20px;
+
+  padding: 20px;
+  padding-left: 22vh;
+  padding-right: 22vh;
+
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  text-decoration: none;
+  transition: all, 0.3s, ease-in-out;
+}
+.lesson-button:hover {
+  color: #d16d6a;
+  border: solid, 2px, #d16d6a;
+  background-color: #000000;
+  font-weight: 900;
+
+}
+
 #modal button.close-button {
   position: absolute;
   top: 0.5rem;
