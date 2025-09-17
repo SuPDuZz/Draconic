@@ -2,6 +2,7 @@ const DOM = {
   timerText:            document.getElementById("timer_text"),
   missesText:           document.getElementById("misses_text"),
   winrateText:          document.getElementById("winrate_text"),
+  totalTimeText:        document.getElementById("total_time_text"),
   attemptsList:         document.getElementById("attempts_list"),
   guessField:           document.getElementById("guess_field"),
   lettrImage:           document.getElementById("lettr_image"),
@@ -32,15 +33,19 @@ const LETTRS_LOCATION = "./assets/images/lettrguessr/";
 let accentHue = Math.random() * 360;
 let guessLightness = 100;
 let startTime = Date.now();
+let realStartTime = Date.now();
 let elapsed = 0;
 let misses = 0;
-let maxMisses = DOM.missesSlide.value;
+let maxMisses = parseInt(DOM.missesSlide.value) || 0;
 let maxTime = DOM.timerSlide.value;
 let lettrsList = [];
+let timesList = [];
+let averateTimePerQuestion = 0;
 let currentLettr = "";
 let wins = 0;
 let losses = 0;
 let winrate = 0;
+let averageTime = 0;
 
 function lerp(a,b,t){return a + (b - a) * t}
 
@@ -51,6 +56,11 @@ function updateValues(){
   if (maxTime > 0 && elapsed >= maxTime) handleWrong(true);
   const total = wins + losses;
   winrate = total > 0 ? (wins / total) * 100 : 0;
+}
+
+function updateAverageTime(){
+  const total = timesList.reduce((a, b) => a + b, 0);
+  averageTime = timesList.length > 0 ? total / timesList.length : 0;
 }
 
 function updateColors(){
@@ -69,8 +79,9 @@ function updateBars(){
 function updateText(){
   DOM.missesText.textContent  = maxMisses < 1 ? `Misses: ${misses}` : maxMisses > 1 ? `Misses: ${misses}/${maxMisses}` : "Missless";
   DOM.confirmBtn.textContent  = DOM.guessField.value.length > 0 ? "Confirm" : "Skip";
-  DOM.timerText.textContent   = "Time: " + (maxTime > 0 ? `${elapsed.toFixed(1)}/${maxTime}s` : `${elapsed.toFixed(1)}s`);
+  DOM.timerText.textContent   = "Time: " + (maxTime > 0 ? `${elapsed.toFixed(1)}/${maxTime}s` : `${elapsed.toFixed(1)}s`) + (averageTime > 0 ? `(${averageTime.toFixed(1)}s avg.)` : "");
   DOM.winrateText.textContent = `Winrate: ${wins}/${losses} (${winrate.toFixed(1)}%)`;
+  DOM.totalTimeText.textContent = `Total time: ${((Date.now()-realStartTime)/1000).toFixed(1)}s`
 }
 
 function mainLoop(){
@@ -119,6 +130,7 @@ function handleRight(){
 function skip(){
   logAttempt();
   setRandomLettr();
+  updateAverageTime();
   misses = 0;
 }
 
@@ -129,19 +141,25 @@ function logAttempt(){
   DOM.attemptsList.scrollTop = 0;
 }
 
+function clearAttemptsLog(){
+  DOM.attemptsList.innerHTML = "";
+  timesList = [];
+}
+
 document.addEventListener("keydown", e => {
   if (e.key === "Enter" && DOM.guessField.value.length > 0) DOM.confirmBtn.click();
+  else if (e.key === "Escape") RESET();
 });
 
 DOM.accentHueSlide.addEventListener("input", () => { accentHue = parseFloat(DOM.accentHueSlide.value); });
 DOM.missesSlide.addEventListener("input", () =>    { maxMisses = parseInt(DOM.missesSlide.value) || 0; });
 DOM.timerSlide.addEventListener("input", () =>     { maxTime = parseInt(DOM.timerSlide.value) || 0; });
 
-const checkboxHandler = () => { updateLettrsList(); setRandomLettr(); };
-DOM.vowelsCheck.addEventListener("input",          checkboxHandler);
-DOM.pyricVowelsCheck.addEventListener("input",     checkboxHandler);
-DOM.consonantsCheck.addEventListener("input",      checkboxHandler);
-DOM.pyricConsonantsCheck.addEventListener("input", checkboxHandler);
+const RESET = () => { updateLettrsList(); setRandomLettr(); clearAttemptsLog(); realStartTime = Date.now(); wins = 0; losses = 0; DOM.guessField.focus();};
+DOM.vowelsCheck.addEventListener("input",          RESET);
+DOM.pyricVowelsCheck.addEventListener("input",     RESET);
+DOM.consonantsCheck.addEventListener("input",      RESET);
+DOM.pyricConsonantsCheck.addEventListener("input", RESET);
 
 DOM.confirmBtn.addEventListener("click", () => {
   if (DOM.guessField.value.length === 0) { handleWrong(true); return; }
@@ -160,7 +178,7 @@ window.addEventListener("click", e => {
 
 document.documentElement.style.setProperty("--guess-hue", 10);
 DOM.helpOverlay.style.display = "none";
-
+DOM.guessField.focus();
 updateLettrsList();
 setRandomLettr();
 mainLoop();
