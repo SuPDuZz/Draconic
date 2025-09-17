@@ -16,10 +16,14 @@ const DOM = {
   accentHueCheck:       document.getElementById("accent_hue_check"),
   timerBar:             document.getElementById("timer_bar"),
   missesBar:            document.getElementById("misses_bar"),
-  winrateBar:           document.getElementById("winrate_bar")
+  winrateBar:           document.getElementById("winrate_bar"),
+  helpBtn:              document.getElementById("help_button"),
+  helpOverlay:          document.getElementById("help_overlay"),
+  helpClose:            document.getElementById("help_close")
 };
+
 const vowels = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
-const pyric_vowels = ["A","AA","O","OO","E","EE"];
+const pyric_vowels = ["A","AA","O","OO","U","UU"];
 const consonants = ["t","c","k","q","Q","'","tr","s","kx","qX","r","l","m","n","ng","d","z","g","f","th","ll","x","X","h"];
 const pyric_consonants = ["qH","QH","XH","H"];
 const LETTRS_FORMAT = "webp";
@@ -147,7 +151,16 @@ DOM.confirmBtn.addEventListener("click", () => {
   guessLightness = 50;
 });
 
+DOM.helpBtn.addEventListener("click", () => {DOM.helpOverlay.style.display = "flex"});
+DOM.helpClose.addEventListener("click", () => {DOM.helpOverlay.style.display = "none"});
+
+window.addEventListener("click", e => {
+  if (e.target === DOM.helpOverlay) DOM.helpOverlay.style.display = "none";
+});
+
 document.documentElement.style.setProperty("--guess-hue", 10);
+DOM.helpOverlay.style.display = "none";
+
 updateLettrsList();
 setRandomLettr();
 mainLoop();
