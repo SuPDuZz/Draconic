@@ -1,89 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/lettrguessr.css">
-    <script src="./js/lettrguessr.js" defer></script>
-    <title>Draconic LettrGuessr by Lirox</title>
-</head>
-<body>
-    <h1 class="textcenter">Draconic LettrGuessr by LiroxDeYamon</h1>
-    <div class="wrap">
-        <div class="card">
-            <h2>What's this?</h2>
-            <img id="lettr_image">
-            <div class="typein">
-                <input id="guess_field" type="text" maxlength="2" placeholder="Type romanized here">
-                <button id="confirm_button">Skip</button>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Attemps</h2>
-            <ul id="attempts_list"></ul>
-        </div>
-    </div>
-</br>
-    <div class="wrap" id="slim">
-        <div class="card">
-            <h2 id="timer_text">Timer</h2>
-            <progress id="timer_bar" value="0" max="100"></progress>
-        </div>
-        <div class="card">
-            <h2 id="misses_text">Errors</h2>
-            <progress id="misses_bar" value="0" max="100"></progress>
-        </div>
-    </div>
-</br>
-    <div class="wrap" id="slim">
-        <div class="card">
-            <h2 id="winrate_text">Winrate</h2>
-            <progress id="winrate_bar" value="0" max="100"></progress>
-        </div>
-    </div>
-</br>
-    <div class="wrap">
-        <div class="card">
-            <h2>Settings</h2>
-            <div class="setting">
-                <div class="setting">
-                    <h2>HUE</h2>
-                    <input type="range" id="accent_hue_slide" min="0" max="360">
-                </div>
-                <div class="setting">
-                    <h2>Loop trough colors</h2>
-                    <input type="checkbox" id="accent_hue_check" checked>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/lettrguessr.css">
+        <script src="./js/lettrguessr.js" defer></script>
+        <title>Draconic LettrGuessr by Lirox</title>
+    </head>
+    <body>
+        <h1 class="textcenter">Draconic LettrGuessr by LiroxDeYamon</h1>
+        <div class="wrap">
+            <div class="card">
+                <h2>What's this?</h2>
+                <img id="lettr_image">
+                <div class="typein">
+                    <button id="help_button">HELP</button>
+                    <input id="guess_field" type="text" maxlength="2" placeholder="Type romanized here">
+                    <button id="confirm_button">Skip</button>
                 </div>
             </div>
-            <div class="setting">
-                <h2>Timer</h2>
-                <input type="range" id="timer_slide" min="0" max="30" value="0">
+            <div class="card">
+                <h2>Attemps</h2>
+                <ul id="attempts_list"></ul>
             </div>
-            <div class="setting">
-                <h2>Max Misses</h2>
-                <input type="range" id="misses_slide" min="0" max="10" value="0">
+        </div>
+    </br>
+        <div class="wrap" id="slim">
+            <div class="card">
+                <h2 id="timer_text">Timer</h2>
+                <progress id="timer_bar" value="0" max="100"></progress>
             </div>
-            <div class="setting">
+            <div class="card">
+                <h2 id="misses_text">Errors</h2>
+                <progress id="misses_bar" value="0" max="100"></progress>
+            </div>
+        </div>
+    </br>
+        <div class="wrap" id="slim">
+            <div class="card">
+                <h2 id="winrate_text">Winrate</h2>
+                <progress id="winrate_bar" value="0" max="100"></progress>
+            </div>
+        </div>
+    </br>
+        <div class="wrap">
+            <div class="card">
+                <h2>Settings</h2>
                 <div class="setting">
-                    <h2>Include vowels</h2>
-                    <input type="checkbox" id="vowels_check" checked>
+                    <div class="setting">
+                        <h2>HUE</h2>
+                        <input type="range" id="accent_hue_slide" min="0" max="360">
+                    </div>
+                    <div class="setting">
+                        <h2>Loop trough colors</h2>
+                        <input type="checkbox" id="accent_hue_check" checked>
+                    </div>
                 </div>
                 <div class="setting">
-                    <h2>Include pyric vowels</h2>
-                    <input type="checkbox" id="pyric_vowels_check" checked>
-                </div>
-            </div>
-            <div class="setting">
-                <div class="setting">
-                    <h2>Include consonants</h2>
-                    <input type="checkbox" id="consonants_check" checked>
+                    <h2>Timer</h2>
+                    <input type="range" id="timer_slide" min="0" max="30" value="0">
                 </div>
                 <div class="setting">
-                    <h2>Include pyric consonants</h2>
-                    <input type="checkbox" id="pyric_consonants_check" checked>
+                    <h2>Max Misses</h2>
+                    <input type="range" id="misses_slide" min="0" max="10" value="0">
+                </div>
+                <div class="setting">
+                    <div class="setting">
+                        <h2>Include vowels</h2>
+                        <input type="checkbox" id="vowels_check" checked>
+                    </div>
+                    <div class="setting">
+                        <h2>Include pyric vowels</h2>
+                        <input type="checkbox" id="pyric_vowels_check" checked>
+                    </div>
+                </div>
+                <div class="setting">
+                    <div class="setting">
+                        <h2>Include consonants</h2>
+                        <input type="checkbox" id="consonants_check" checked>
+                    </div>
+                    <div class="setting">
+                        <h2>Include pyric consonants</h2>
+                        <input type="checkbox" id="pyric_consonants_check" checked>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+        <div id="help_overlay">
+            <div id="help_content">
+                <span id="help_close">&times;</span>
+                <h2>Help</h2>
+                <p>Type the romanized letter for the symbol shown above, then press Confirm button or Enter key to move on.</p>
+                <p>You can skip letters but it will affect your winrate.</p>
+                <p>Romanized letters:</p>
+                <table border="1" cellpadding="6" cellspacing="0">
+                <tbody>
+                    <tr>
+                    <td>t = t</td>
+                    <td>c = c</td>
+                    <td>k = k</td>
+                    <td>q = q</td>
+                    <td>q̇ = Q</td>
+                    <td>´ = ' or `</td>
+                    </tr>
+                    <tr>
+                    <td>tr = tr</td>
+                    <td>s = s</td>
+                    <td>kx = kx</td>
+                    <td>qχ = qX</td>
+                    <td>qħ = qH</td>
+                    <td>q̇ħ = QH</td>
+                    </tr>
+                    <tr>
+                    <td>d = d</td>
+                    <td>z = z</td>
+                    <td>g = g</td>
+                    <td>f = f</td>
+                    <td>th = th</td>
+                    <td>ll = ll</td>
+                    </tr>
+                    <tr>
+                    <td>x = x</td>
+                    <td>χ = X</td>
+                    <td>h = h</td>
+                    <td>χħ = XH</td>
+                    <td>ħ = H</td>
+                    <td>r = r</td>
+                    </tr>
+                    <tr>
+                    <td>l = l</td>
+                    <td>e = e</td>
+                    <td>æ = ae</td>
+                    <td>y = y</td>
+                    <td>a = a</td>
+                    <td>o = o</td>
+                    </tr>
+                    <tr>
+                    <td>u = u</td>
+                    <td>i = i</td>
+                    <td>ē = ee</td>
+                    <td>ā = aa</td>
+                    <td>ō = oo</td>
+                    <td>ū = uu</td>
+                    </tr>
+                    <tr>
+                    <td>ī = ii</td>
+                    <td>m = m</td>
+                    <td>n = n</td>
+                    <td>ŋ = ng</td>
+                    </tr>
+                    <tr>
+                    <td>á = A</td>
+                    <td>â = AA</td>
+                    <td>ó = O</td>
+                    <td>ô = OO</td>
+                    <td>ú = U</td>
+                    <td>û = UU</td>
+                    </tr>
+                </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </body>
 </html>
