@@ -13,7 +13,7 @@ const DOM = {
   vowelsCheck:          document.getElementById("vowels_check"),
   pyricVowelsCheck:     document.getElementById("pyric_vowels_check"),
   consonantsCheck:      document.getElementById("consonants_check"),
-  pyricConsonantsCheck: document.getElementById("pyric_consonants_check"),
+  specialConsonantsCheck: document.getElementById("special_consonants_check"),
   accentHueCheck:       document.getElementById("accent_hue_check"),
   timerBar:             document.getElementById("timer_bar"),
   missesBar:            document.getElementById("misses_bar"),
@@ -24,11 +24,15 @@ const DOM = {
 };
 
 const vowels = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
-const pyric_vowels = ["A","AA","O","OO","U","UU"];
-const consonants = ["t","c","k","q","Q","'","tr","s","kx","qX","r","l","m","n","ng","d","z","g","f","th","ll","x","X","h"];
-const pyric_consonants = ["qH","QH","XH","H"];
+const pyric_vowels = ["a_pyr","aa_pyr","o_pyr","oo_pyr","u_pyr","uu_pyr"];
+const consonants = ["t","c","k","q","'","tr","s","kx","r","l","m","n","ng","d","z","g","f","th","ll","x","h"];
+const special_consonants = ["qh_bar","q_doth_bar","chih_bar","h_bar", "q_dot", "qchi", "chi"];
 const LETTRS_FORMAT = "webp";
 const LETTRS_LOCATION = "./assets/images/lettrguessr/";
+const acceptable_answers = {
+  "a_pyr" : "A", "aa_pyr" :"AA", "o_pyr" : "O", "oo_pyr" : "OO", "u_pyr" : "U", "uu_pyr" : "UU",
+  "qh_bar" : "qH", "q_doth_bar" : "QH", "chih_bar" : "XH", "h_bar" : "H", "q_dot" : "Q", "qchi" : "qX", "chi" : "X"
+};
 
 let accentHue = Math.random() * 360;
 let guessLightness = 100;
@@ -97,8 +101,16 @@ function setRandomLettr(){
   if (lettrsList.length === 0) return;
   currentLettr = lettrsList[Math.floor(Math.random() * lettrsList.length)];
   DOM.lettrImage.src = LETTRS_LOCATION + currentLettr + "." + LETTRS_FORMAT;
+  currentLettr = normalizeLetter(currentLettr);
   startTime = Date.now();
   misses = 0;
+}
+
+function normalizeLetter(str) {
+  if (acceptable_answers[str]) {
+    return acceptable_answers[str];
+  }
+  return str; // return unchanged if not in mapping
 }
 
 function updateLettrsList(){
@@ -106,7 +118,7 @@ function updateLettrsList(){
   if (DOM.vowelsCheck.checked)          lettrsList.push(...vowels);
   if (DOM.pyricVowelsCheck.checked)     lettrsList.push(...pyric_vowels);
   if (DOM.consonantsCheck.checked)      lettrsList.push(...consonants);
-  if (DOM.pyricConsonantsCheck.checked) lettrsList.push(...pyric_consonants);
+  if (DOM.specialConsonantsCheck.checked) lettrsList.push(...special_consonants);
 }
 
 function recordLoss(){ losses++; skip(); }
@@ -159,7 +171,7 @@ const RESET = () => { updateLettrsList(); setRandomLettr(); clearAttemptsLog(); 
 DOM.vowelsCheck.addEventListener("input",          RESET);
 DOM.pyricVowelsCheck.addEventListener("input",     RESET);
 DOM.consonantsCheck.addEventListener("input",      RESET);
-DOM.pyricConsonantsCheck.addEventListener("input", RESET);
+DOM.specialConsonantsCheck.addEventListener("input", RESET);
 
 DOM.confirmBtn.addEventListener("click", () => {
   if (DOM.guessField.value.length === 0) { handleWrong(true); return; }
