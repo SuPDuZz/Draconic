@@ -1,14 +1,15 @@
 const mainText = 'pronounced {name_ipa}, represented with a "{letter_rom}" in the romanized way of writing, and "{letter}" in normal. The symbol makes the sound {letter_ipa} when spoken.'
 const pyricHText = 'Letters containig /ħ/ are pronounced by dragon using /h/ and breathing out fire. Humans can use a lighter or stick to the /ħ/'
 const pyricVowelText = 'Some letters following by q̇ħóll are considered pyric, and pronounced by dragon breathing out fire. Humans can use a lighter or stick to alternative sound (see first allophone).'
-const soundPath = "https://supduzz.github.io/Draconic/assets/sound/symbol-"
+const soundPath = "./assets/sound/symbol-"
 
 const allophones = {
-  "before i": 'if placed before "i" or "ī"',
-  "before obs": "if placed before obstruent",
-  "word-final before obs": "if placed word-finally or before obstruent",
-  "intervoc": "if intervocalically",
-  "pyric": "if placed before q̇ħóll"
+  "before i": 'placed before "i" or "ī"',
+  "before obs": "placed before obstruent",
+  "word-init": "word-initially and before voiceless obstruents",
+  "word-final": "placed word-finally or before obstruent",
+  "intervoc": "intervocalically",
+  "pyric": "placed before q̇ħóll"
 }
 
 window.alphabetMap = [
@@ -18,7 +19,7 @@ window.alphabetMap = [
       letter: "t", letter_rom: ["t"], letter_ipa: "/t̪/", letter_glyph: "\uE000",
       text: mainText,
       allophones: {
-         "/t̪̚/": allophones["word-final before obs"],
+         "/t̪̚/": allophones["word-final"],
       },
       sound: soundPath+"0-0.mp3"
     },
@@ -38,7 +39,7 @@ window.alphabetMap = [
       allophones: {
         "/c/": allophones["before i"],
         "/g̥/": allophones["intervoc"],
-        "/k̚/": allophones["word-final before obs"],
+        "/k̚/": allophones["word-final"],
       },
       sound: soundPath+"0-2.mp3"
     },
@@ -48,7 +49,7 @@ window.alphabetMap = [
       text: mainText,
       allophones: {
         "/ɢ̥/": allophones["intervoc"],
-        "/q̚/": allophones["word-final before obs"]
+        "/q̚/": allophones["word-final"]
       },
       sound: soundPath+"0-3.mp3"
     },
@@ -58,7 +59,7 @@ window.alphabetMap = [
       text: mainText+" If you struggle while pronouncing this, try looking up aryepiglottic folds, and mess around with how to contract them.",
       allophones: {
         "/ʡ̆/" :allophones["intervoc"],
-        "/ʡ̚/": allophones["word-final before obs"]
+        "/ʡ̚/": allophones["word-final"]
       },
       sound: soundPath+"0-4.mp3"
     },
@@ -68,7 +69,7 @@ window.alphabetMap = [
       text: mainText,
       allophones: {
         "/ʔ̞/": allophones["intervoc"],
-        "/ʔ̚/": allophones["word-final before obs"]
+        "/ʔ̚/": allophones["word-final"]
       },
       sound: soundPath+"0-5.mp3"
     },
@@ -78,7 +79,7 @@ window.alphabetMap = [
       name: 'trō',  name_ipa: "/t̪roː/",
       letter: "tr", letter_rom: ["tr"], letter_ipa: "/t̪r/", letter_glyph: "\uE006",
       text: mainText,
-      allophones: {"/t̪r/": allophones["before obs"]},
+      allophones: {"/t̪r̥/": "before voiceless obstruents"},
       sound: soundPath+"1-0.mp3"
     },
     { // 7
@@ -148,7 +149,7 @@ window.alphabetMap = [
       text: mainText,
       allophones: {
         "/f/": 'when adjecent to "th"', 
-        "/β/": "if intervocalically or adjecent to z, g", 
+        "/β/": "intervocalically or adjecent to z, g", 
         "/v/": "when adjecent to d"
       },
       sound: soundPath+"2-3.mp3"
@@ -210,7 +211,7 @@ window.alphabetMap = [
       name: 'rox',  name_ipa: "/r̥ox/",
       letter: "r", letter_rom: ["r"], letter_ipa: "/ɾ/", letter_glyph: "\uE017",
       text: mainText,
-      allophones: {"/r̥/": "if placed word-initially or before voiceless obstruent"},
+      allophones: {"/r̥/": "word-init"},
       sound: soundPath+"3-5.mp3"
     }, 
   ],
@@ -220,7 +221,7 @@ window.alphabetMap = [
       name: 'lel',  name_ipa: "/l̥el̪/",
       letter: "l", letter_rom: ["l"], letter_ipa: "/l̪/", letter_glyph: "\uE018",
       text: mainText,
-      allophones: {"/l̥/": "if placed word-initially or before voiceless obstruent"},
+      allophones: {"/l̥/": "word-init"},
       sound: soundPath+"4-0.mp3"
     },
     { // 25
@@ -320,7 +321,7 @@ window.alphabetMap = [
       name: 'má',  name_ipa: "/m̥ɑ̤ˤ/",
       letter: "m", letter_rom: ["m"], letter_ipa: "/m̥/", letter_glyph: "\uE025",
       text: mainText,
-      allophones: {"/m̥/": "if placed word-initially or before voiceless obstruent"},
+      allophones: {"/m̥/": "word-init"},
       sound: soundPath+"6-1.mp3"
     },
     { // 38
@@ -328,7 +329,7 @@ window.alphabetMap = [
       letter: "n", letter_rom: ["n"], letter_ipa: "/n/", letter_glyph: "\uE026",
       text: mainText,
       allophones: {
-        "/n̥/": "if placed word-initially, word-finally or before voicelss obstruent",
+        "/n̥/": "word-initially, word-finally or before voicelss obstruent",
         "/n̪/": "before dentals",
         "/ŋ/": "before velars and uvulars"
       },
