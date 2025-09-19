@@ -1,7 +1,7 @@
 const mainText = 'pronounced {name_ipa}, represented with a "{letter_rom}" in the romanized way of writing, and "{letter}" in normal. The symbol makes the sound {letter_ipa} when spoken.'
 const pyricHText = 'Letters containig /ħ/ are pronounced by dragon using /h/ and breathing out fire. Humans can use a lighter or stick to the /ħ/'
 const pyricVowelText = 'Some letters following by q̇ħóll are considered pyric, and pronounced by dragon breathing out fire. Humans can use a lighter or stick to alternative sound (see first allophone).'
-const soundPath = "../assets/sound/symbol-"
+const soundPath = "../Draconic/assets/sound/symbol-"
 
 const allophones = {
   "before i": 'if placed before "i" or "ī"',
