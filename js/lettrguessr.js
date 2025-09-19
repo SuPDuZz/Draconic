@@ -1,38 +1,41 @@
 const DOM = {
-  timerText:            document.getElementById("timer_text"),
-  missesText:           document.getElementById("misses_text"),
-  winrateText:          document.getElementById("winrate_text"),
-  totalTimeText:        document.getElementById("total_time_text"),
-  attemptsList:         document.getElementById("attempts_list"),
-  guessField:           document.getElementById("guess_field"),
-  lettrImage:           document.getElementById("lettr_image"),
-  confirmBtn:           document.getElementById("confirm_button"),
-  accentHueSlide:       document.getElementById("accent_hue_slide"),
-  missesSlide:          document.getElementById("misses_slide"),
-  timerSlide:           document.getElementById("timer_slide"),
-  vowelsCheck:          document.getElementById("vowels_check"),
-  pyricVowelsCheck:     document.getElementById("pyric_vowels_check"),
-  consonantsCheck:      document.getElementById("consonants_check"),
+  timerText:              document.getElementById("timer_text"),
+  missesText:             document.getElementById("misses_text"),
+  winrateText:            document.getElementById("winrate_text"),
+  totalTimeText:          document.getElementById("total_time_text"),
+  attemptsList:           document.getElementById("attempts_list"),
+  guessField:             document.getElementById("guess_field"),
+  lettrImage:             document.getElementById("lettr_image"),
+  confirmBtn:             document.getElementById("confirm_button"),
+  accentHueSlide:         document.getElementById("accent_hue_slide"),
+  missesSlide:            document.getElementById("misses_slide"),
+  timerSlide:             document.getElementById("timer_slide"),
+  vowelsCheck:            document.getElementById("vowels_check"),
+  pyricVowelsCheck:       document.getElementById("pyric_vowels_check"),
+  consonantsCheck:        document.getElementById("consonants_check"),
   specialConsonantsCheck: document.getElementById("special_consonants_check"),
-  accentHueCheck:       document.getElementById("accent_hue_check"),
-  timerBar:             document.getElementById("timer_bar"),
-  missesBar:            document.getElementById("misses_bar"),
-  winrateBar:           document.getElementById("winrate_bar"),
-  helpBtn:              document.getElementById("help_button"),
-  helpOverlay:          document.getElementById("help_overlay"),
-  helpClose:            document.getElementById("help_close")
+  accentHueCheck:         document.getElementById("accent_hue_check"),
+  timerBar:               document.getElementById("timer_bar"),
+  missesBar:              document.getElementById("misses_bar"),
+  winrateBar:             document.getElementById("winrate_bar"),
+  helpBtn:                document.getElementById("help_button"),
+  helpOverlay:            document.getElementById("help_overlay"),
+  helpClose:              document.getElementById("help_close")
 };
 
-const vowels = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
-const pyric_vowels = ["a_pyr","aa_pyr","o_pyr","oo_pyr","u_pyr","uu_pyr"];
-const consonants = ["t","c","k","q","'","tr","s","kx","r","l","m","n","ng","d","z","g","f","th","ll","x","h"];
-const special_consonants = ["qh_bar","q_doth_bar","chih_bar","h_bar", "q_dot", "qchi", "chi"];
-const LETTRS_FORMAT = "webp";
-const LETTRS_LOCATION = "./assets/images/lettrguessr/";
-const acceptable_answers = {
-  "a_pyr" : "A", "aa_pyr" :"AA", "o_pyr" : "O", "oo_pyr" : "OO", "u_pyr" : "U", "uu_pyr" : "UU",
-  "qh_bar" : "qH", "q_doth_bar" : "QH", "chih_bar" : "XH", "h_bar" : "H", "q_dot" : "Q", "qchi" : "qX", "chi" : "X"
-};
+const vowels              = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
+const pyric_vowels        = ["a_pyr","aa_pyr","o_pyr","oo_pyr","u_pyr","uu_pyr"];
+const consonants          = ["t","c","k","q","'","tr","s","kx","r","l","m","n","ng","d","z","g","f","th","ll","x","h"];
+const special_consonants  = ["qh_bar","q_doth_bar","chih_bar","h_bar", "q_dot", "qchi", "chi"];
+const LETTRS_FORMAT       = "webp";
+const LETTRS_LOCATION     = "./assets/images/lettrguessr/";
+const acceptable_answers  = { "a_pyr" : "A",      "aa_pyr" :"AA", 
+                              "o_pyr" : "O",      "oo_pyr" : "OO", 
+                              "u_pyr" : "U",      "uu_pyr" : "UU",
+                              "qh_bar" : "qH",    "q_doth_bar" : "QH", 
+                              "chih_bar" : "XH",  "h_bar" : "H", 
+                              "q_dot" : "Q",      "qchi" : "qX", 
+                              "chi" : "X"};
 
 let accentHue = Math.random() * 360;
 let guessLightness = 100;
