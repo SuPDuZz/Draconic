@@ -59,3 +59,7 @@ h1 {
     color: #000000;
     font-weight: bold;
 }
+@font-face {
+  font-family: "SegoeUIDrac";
+  src: url("../assets/fonts/SegoeUIDrac.ttf") format("truetype");
+}
