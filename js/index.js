@@ -1,82 +1,114 @@
+console.log(document.getElementById('alphabet').innerHTML);
+
+// TODO: redo using alphabetmap
 const modal = document.getElementById('modal');
-const modalImage = document.getElementById('modalImage');
+const modalGlyph = document.getElementById('modalGlyph');
 const modalText = document.getElementById('modalText');
 const grid = document.getElementById('grid-placeholder');
 const modalAllophone = document.getElementById('modalAllophone');
 const allophoneTable = document.getElementById('allophoneTable');
+const modalLabel = document.getElementById('modalLabel');
 
-const COLS = 6;
-const ROWS = 7;
-
-const CELL_HEIGHT = 129;
-const CELL_WIDTH = 101;
-
-let modalNumber = 0;
-
-let relCol;
-let relRow;
-let soundPath;
-
-//creates the grid buttons over the alphabet
-for (let row = 0; row < ROWS; row++){
-  for (let col = 0; col < COLS; col++) {
-    const cell = document.createElement('button');
-    cell.className = 'grid-button';
-    const currentNumber = modalNumber;
-    cell.addEventListener('click', () => openModal(currentNumber));
-    modalNumber++;
-    grid.appendChild(cell);
-  } 
+function description(entry){
+  if(!entry.text) return '';
+  return entry.text
+    .replaceAll('{name}', entry.name||'')
+    .replaceAll('{name_ipa}', entry.name_ipa||'')
+    .replaceAll('{letter_rom}', entry.letter_rom?.join('" or a "')||'')
+    .replaceAll('{letter_ipa}', entry.letter_ipa||'')
+    .replaceAll('{letter}', entry.letter||'');
 }
+
+const table = document.getElementById('alphabet');
+
+let sound;
+
+// generate table
+window.alphabetMap.forEach(row=>{
+  const trNames = document.createElement('tr');
+  const trGlyphs = document.createElement('tr');
+
+  row.forEach(entry=>{
+    const tdName = document.createElement('td');
+    tdName.textContent = `${entry.letter} - ${entry.name}`;
+
+    const tdGlyph = document.createElement('td');
+    tdGlyph.classList.add("glyph");
+
+    const span = document.createElement('span');
+    span.textContent = entry.letter_glyph || '';
+    span.style.display = 'inline-block';
+    span.style.transformOrigin = 'center center';
+
+    tdName.addEventListener('click', ()=>{
+      openModal(entry)
+    });
+    tdGlyph.addEventListener('click', ()=>{
+      openModal(entry)
+    });
+
+    tdGlyph.appendChild(span);
+    trNames.appendChild(tdName);
+    trGlyphs.appendChild(tdGlyph);
+
+    setTimeout(()=>{
+      const scaleExtra = entry.table_prop?.size || 1;
+      const xOffset = entry.table_prop?.xoffset || 0;
+      const yOffset = entry.table_prop?.yoffset || 0;
+      span.style.transform = `scale(${scaleExtra}) translateX(${xOffset}px) translateY(${yOffset}px)`;
+    });
+  });
+
+  table.appendChild(trNames);
+  table.appendChild(trGlyphs);
+});
+
 
 //modal function with the number from the buttons
-function openModal(index) {
-  //gets the relevent info from the alphabetmap
-  const content = alphabetMap[index] || alphabetMap[0];
-  modalText.textContent = content.text;
+function openModal(entry) {
+  if (entry.text === "") return;
+  modalLabel.textContent = entry.name;
+  modalText.textContent = description(entry);
+  modalGlyph.textContent = entry.letter_glyph;
+  sound = entry.sound;
+  // Allophones
+  allophoneTable.innerHTML = "";
+  if (entry.allophones && Object.keys(entry.allophones).length > 0) {
+    allophoneTable.style.display = "table";
 
-  //gets the sounds path
-  relCol = content.column;
-  relRow = content.row;
-  soundPath = `./assets/sound/symbol-${relRow}-${relCol}.mp3`;
-  
-  //places the img cutout at the right point of the total img.
-  x = -(relCol * CELL_WIDTH);
-  y = -(relRow * CELL_HEIGHT);
-  modalImage.style.backgroundPosition = `${x}px ${y}px`;
-   
-  //hides the allophone as default, cause half of the symbols have no allophones, and there a 2 types since allophones are different for the pyric symbol
-  modalAllophone.style.display = "none";
-  allophoneTable.style.display = "none";
+    const header = document.createElement("tr");
+    ["Allophone", "Condition"].forEach(text => {
+      const th = document.createElement("th");
+      th.textContent = text;
+      header.appendChild(th);
+    });
+    allophoneTable.appendChild(header);
 
-  if (relRow == '6' && relCol == '4') { //if pyric symbol
-    modalImage.style.display = "block"; // show picture
-    allophoneTable.style.display = "block";
-    pyricAllophone(content); // runs allophone function
-  } 
-  else if (content.name == 'more') { // if last square (more)
-    modalImage.style.display = "none";
-  } 
-  else { //else, aka all not wierd symbols
-    modalImage.style.display = "block"; //shows img.
-    if (content.allophones === "none") { // if no allophone
-      modalAllophone.style.display = "none";
-    } 
-    else { // if allophone
-      modalAllophone.style.display = "block"; //show
-      modalAllophone.textContent = content.allophones;
+    for (const symbol in entry.allophones) {
+      const tr = document.createElement("tr");
+      const tdSymbol = document.createElement("td");
+      tdSymbol.textContent = symbol;
+      const tdCond = document.createElement("td");
+      tdCond.textContent = entry.allophones[symbol];
+      tr.appendChild(tdSymbol);
+      tr.appendChild(tdCond);
+      allophoneTable.appendChild(tr);
     }
+  } else {
+    allophoneTable.style.display = "none";
   }
-  document.getElementById("modal").style.display="flex"; //show modal
+
+  modal.style.display = "flex";
 }
 
+
 function closeModal() { //when closed
-  document.getElementById("modal").style.display="none"; // hide modal
+  modal.style.display="none"; // hide modal
 }
 
 let audio;
 function playSound() { // when playsound button hit
-  audio = new Audio(soundPath);
+  audio = new Audio(sound);
   if (audio.pause) {
     audio.play(); //play sound
   }
@@ -102,6 +134,10 @@ function pyricAllophone(content) { //allophone for pyric
   }
 }
 
-function moreSymbols() {
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
+});
 
-}
+window.addEventListener("click", e => {
+  if (e.target === modal) closeModal();
+});

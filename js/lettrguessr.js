@@ -33,6 +33,7 @@ const acceptable_answers = {
   "a_pyr" : "A", "aa_pyr" :"AA", "o_pyr" : "O", "oo_pyr" : "OO", "u_pyr" : "U", "uu_pyr" : "UU",
   "qh_bar" : "qH", "q_doth_bar" : "QH", "chih_bar" : "XH", "h_bar" : "H", "q_dot" : "Q", "qchi" : "qX", "chi" : "X"
 };
+// TODO: redo using alphabetmap
 
 let accentHue = Math.random() * 360;
 let guessLightness = 100;
