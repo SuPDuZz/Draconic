@@ -23,19 +23,17 @@ const DOM = {
   helpClose:              document.getElementById("help_close")
 };
 
-const vowels              = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
-const pyric_vowels        = ["a_pyr","aa_pyr","o_pyr","oo_pyr","u_pyr","uu_pyr"];
-const consonants          = ["t","c","k","q","'","tr","s","kx","r","l","m","n","ng","d","z","g","f","th","ll","x","h"];
-const special_consonants  = ["qh_bar","q_doth_bar","chih_bar","h_bar", "q_dot", "qchi", "chi"];
-const LETTRS_FORMAT       = "webp";
-const LETTRS_LOCATION     = "./assets/images/lettrguessr/";
-const acceptable_answers  = { "a_pyr" : "A",      "aa_pyr" :"AA", 
-                              "o_pyr" : "O",      "oo_pyr" : "OO", 
-                              "u_pyr" : "U",      "uu_pyr" : "UU",
-                              "qh_bar" : "qH",    "q_doth_bar" : "QH", 
-                              "chih_bar" : "XH",  "h_bar" : "H", 
-                              "q_dot" : "Q",      "qchi" : "qX", 
-                              "chi" : "X"};
+const vowels = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
+const pyric_vowels = ["a_pyr","aa_pyr","o_pyr","oo_pyr","u_pyr","uu_pyr"];
+const consonants = ["t","c","k","q","'","tr","s","kx","r","l","m","n","ng","d","z","g","f","th","ll","x","h"];
+const special_consonants = ["qh_bar","q_doth_bar","chih_bar","h_bar", "q_dot", "qchi", "chi"];
+const LETTRS_FORMAT = "webp";
+const LETTRS_LOCATION = "./assets/images/lettrguessr/";
+const acceptable_answers = {
+  "a_pyr" : "A", "aa_pyr" :"AA", "o_pyr" : "O", "oo_pyr" : "OO", "u_pyr" : "U", "uu_pyr" : "UU",
+  "qh_bar" : "qH", "q_doth_bar" : "QH", "chih_bar" : "XH", "h_bar" : "H", "q_dot" : "Q", "qchi" : "qX", "chi" : "X"
+};
+// TODO: redo using alphabetmap
 
 let accentHue = Math.random() * 360;
 let guessLightness = 100;
