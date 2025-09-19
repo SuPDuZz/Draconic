@@ -114,26 +114,6 @@ function playSound() { // when playsound button hit
   }
 }
 
-function pyricAllophone(content) { //allophone for pyric
-  // table headers
-  allophoneTable.innerHTML = `
-      <tr>
-        <th>Normal</th>
-        <th>Pyric</th>
-      </tr>
-  `;
-  //table content that reacts to alphabetmap
-  for (let i = 0; i < content.allophones.length; i++) {
-    const allo = content.allophones[i] || content.allophones[0];
-    allophoneTable.innerHTML += `
-      <tr>
-        <td>${allo.letter}</td>
-        <td>${allo.change}</td>
-      </tr>
-    `;
-  }
-}
-
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeModal();
 });

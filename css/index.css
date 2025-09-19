@@ -24,44 +24,53 @@ p {
   margin: 0;
 }
 
+/*alphabet table styling*/
 .alphabet-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.alphabet {
+#alphabet {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: max-content;
+}
+#alphabet tr:nth-child(odd) td {
+  background: #D16D6A;
+  height: 25px;
+  line-height: 25px;
+  font-weight: bolder;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000;
+  padding: 0;
+}
+#alphabet tr:nth-child(even) td {
+  background: #EECECD;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000;
+  padding: 0;
+}
+#alphabet tr:nth-child(even) td:hover {
+  background: #cdecee;
+}
+#alphabet td {
+  width: 95px;
+  padding: 0;
+}
+td.glyph span { /*styles the glyphs inside of every span of the alphabet table*/
   position: relative;
+  top: -8px;
   display: inline-block;
   vertical-align: middle;
+  font-size: 140px;
+  line-height: 110px;
+  width: 95px;
+  height: 110px;
 }
 
-#lessons {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.lesson-button {
-  border: 2px solid #000;
-  background-color: #d16d6a;
-  border-radius: 10px;
-  margin-top: 20px;
-  padding: 20px 22vh;
-  font-size: 20px;
-  font-weight: bold;
-  color: #000;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.lesson-button:hover {
-  color: #d16d6a;
-  border: 2px solid #d16d6a;
-  background-color: #000;
-  font-weight: 900;
-}
-
+/*modal styling*/
 #modal {
   display: none;
   position: fixed;
@@ -74,7 +83,6 @@ p {
   align-items: center;
   background-color: rgba(0,0,0,0.2);
 }
-
 .modalContent {
   position: relative;
   padding: 1.5rem;
@@ -82,13 +90,12 @@ p {
   max-width: 100%;
   background-color: #fff;
   width: 300px;
+  background-image: url(../assets/images/parchment.jpg);
 }
-
 #modalText {
   font-size: 12px;
-  margin-bottom: 1rem;
+  margin-bottom: 5px;
 }
-
 .modalClose {
   position: absolute;
   top: 0.5rem;
@@ -96,109 +103,36 @@ p {
   color: #6B7280;
   border: none;
 }
-
 .modalClose:hover {
   color: #000;
 }
 
-#footer-placeholder {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-#alphabet {
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: max-content;
-}
-
-#alphabet tr:nth-child(odd) td {
-  background: #D16D6A;
-  height: 25px;
-  line-height: 25px;
-  font-weight: bolder;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #000;
-  padding: 0;
-}
-
-#alphabet tr:nth-child(even) td {
-  background: #EECECD;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #000;
-  padding: 0;
-}
-
-#alphabet tr:nth-child(even) td:hover {
-  background: #cdecee;
-}
-
-#alphabet td {
-  width: 95px;
-  padding: 0;
-}
-
-.glyph {
-  font-family: "SegoeUIDrac", sans-serif;
-  color: #AC272B;
-  text-align: center;
-}
-
-#modalGlyph {
-  font-size: 120px;
-  line-height: 110px;
-}
-
-td.glyph span {
-  position: relative;
-  top: -8px;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 140px;
-  line-height: 110px;
-  width: 95px;
-  height: 110px;
-}
-
+/*wraps around the glyph and vertical align div*/
 .horisontalAlign {
   display: flex;
   align-items:start;
   gap: 15px;
   margin-top: 10px;
 }
+.horisontalAlign > .glyph { /*styles only the glyph inside horizontal Align*/
+  background-color: #EECECD;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 120px;
+  line-height: 110px;
+}
+.glyph {/*styles eventual future glyphs*/
+  font-family: "SegoeUIDrac", sans-serif;
+  color: #AC272B;
+  text-align: center;
+}
 
+/*vertical align is the div that wraps the name text and sound button of the modal*/
 .verticalAlign {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-
-.horisontalAlign > .glyph {
-  background-color: #EECECD;
-  border: 1px solid black;
-  padding: 10px;
-}
-
-.modalContent > table td,
-.modalContent > table th {
-  border: 1px solid black;
-}
-
-.modalContent > table {
-  border-collapse: collapse;
-}
-
-.modalContent > table tr:first-child {
-  background-color: #D16D6A;
-}
-
-.modalContent > table tr:not(:first-child) {
-  background-color: #EECECD;
-}
-
 .verticalAlign p#modalLabel {
   background-color: #D16D6A;
   border: 1px solid black;
@@ -207,15 +141,61 @@ td.glyph span {
   margin: 0;
   padding: 1px 5px;
 }
-
 .verticalAlign p {
   background-color: #EECECD;
   border: 1px solid black;
   padding: 5px;
 }
 
-.modalContent {
-  background-image: url(../assets/images/parchment.jpg);
+/*the allophone table underneath the horizontalAlign*/
+#allophoneTable td,
+#allophoneTable th {
+  border: 1px solid black;
+}
+
+#allophoneTable {
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#allophoneTable tr:first-child {
+  background-color: #D16D6A;
+}
+
+#allophoneTable tr:not(:first-child) {
+  background-color: #EECECD;
 }
 
 
+/*lesson buttons styling*/
+#lessons {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.lesson-button {
+  border: 2px solid #000;
+  background-color: #d16d6a;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 20px 22vh;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.lesson-button:hover {
+  color: #d16d6a;
+  border: 2px solid #d16d6a;
+  background-color: #000;
+  font-weight: 900;
+}
+
+/*footer*/
+#footer-placeholder {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
