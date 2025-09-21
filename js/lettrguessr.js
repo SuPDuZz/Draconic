@@ -5,7 +5,7 @@ const DOM = {
   totalTimeText:          document.getElementById("total_time_text"),
   attemptsList:           document.getElementById("attempts_list"),
   guessField:             document.getElementById("guess_field"),
-  lettrImage:             document.getElementById("lettr_image"),
+  lettrText:              document.getElementById("lettr_text"),
   confirmBtn:             document.getElementById("confirm_button"),
   accentHueSlide:         document.getElementById("accent_hue_slide"),
   missesSlide:            document.getElementById("misses_slide"),
@@ -20,22 +20,14 @@ const DOM = {
   winrateBar:             document.getElementById("winrate_bar"),
   helpBtn:                document.getElementById("help_button"),
   helpOverlay:            document.getElementById("help_overlay"),
-  helpClose:              document.getElementById("help_close")
+  helpClose:              document.getElementById("help_close"),
+  unredGlyphCheck:        document.getElementById("unred_glyph")
 };
 
-const vowels = ["a","aa","o","oo","i","ii","e","ee","u","uu","ae","y"];
-const pyric_vowels = ["a_pyr","aa_pyr","o_pyr","oo_pyr","u_pyr","uu_pyr"];
-const consonants = ["t","c","k","q","'","tr","s","kx","r","l","m","n","ng","d","z","g","f","th","ll","x","h"];
-const special_consonants = ["qh_bar","q_doth_bar","chih_bar","h_bar", "q_dot", "qchi", "chi"];
-const LETTRS_FORMAT = "webp";
-const LETTRS_LOCATION = "./assets/images/lettrguessr/";
-const acceptable_answers = {
-  "a_pyr" : "A", "aa_pyr" :"AA", "o_pyr" : "O", "oo_pyr" : "OO", "u_pyr" : "U", "uu_pyr" : "UU",
-  "qh_bar" : "qH", "q_doth_bar" : "QH", "chih_bar" : "XH", "h_bar" : "H", "q_dot" : "Q", "qchi" : "qX", "chi" : "X"
-};
-// TODO: redo using alphabetmap
-
+const qholl = get_entry_by_id(40);
+console.log(qholl)
 let accentHue = Math.random() * 360;
+if (!DOM.accentHueCheck.checked) accentHue = DOM.accentHueSlide.value;
 let guessLightness = 100;
 let startTime = Date.now();
 let realStartTime = Date.now();
@@ -46,7 +38,8 @@ let maxTime = DOM.timerSlide.value;
 let lettrsList = [];
 let timesList = [];
 let averateTimePerQuestion = 0;
-let currentLettr = "";
+let currentLettr = qholl;
+let pyricLettr = false;
 let wins = 0;
 let losses = 0;
 let winrate = 0;
@@ -98,29 +91,24 @@ function mainLoop(){
   requestAnimationFrame(mainLoop);
 }
 
-function setRandomLettr(){
-  if (lettrsList.length === 0) return;
-  currentLettr = lettrsList[Math.floor(Math.random() * lettrsList.length)];
-  DOM.lettrImage.src = LETTRS_LOCATION + currentLettr + "." + LETTRS_FORMAT;
-  currentLettr = normalizeLetter(currentLettr);
-  startTime = Date.now();
-  misses = 0;
-}
+function setRandomLettr() {
+  const result = get_random_entry(
+    DOM.vowelsCheck.checked,
+    DOM.consonantsCheck.checked,
+    DOM.pyricVowelsCheck.checked,
+    DOM.specialConsonantsCheck.checked
+  );
 
-function normalizeLetter(str) {
-  if (acceptable_answers[str]) {
-    return acceptable_answers[str];
+  if (!result) {
+    currentLettr = qholl;
+    pyricLettr = false;
+  } else {
+    [currentLettr, pyricLettr] = result;
   }
-  return str; // return unchanged if not in mapping
+
+  DOM.lettrText.textContent = currentLettr.letter_glyph + (pyricLettr ? qholl.letter_glyph : "");
 }
 
-function updateLettrsList(){
-  lettrsList = [];
-  if (DOM.vowelsCheck.checked)          lettrsList.push(...vowels);
-  if (DOM.pyricVowelsCheck.checked)     lettrsList.push(...pyric_vowels);
-  if (DOM.consonantsCheck.checked)      lettrsList.push(...consonants);
-  if (DOM.specialConsonantsCheck.checked) lettrsList.push(...special_consonants);
-}
 
 function recordLoss(){ losses++; skip(); }
 function recordWin(){ wins++; skip(); }
@@ -144,12 +132,13 @@ function skip(){
   logAttempt();
   setRandomLettr();
   updateAverageTime();
+  startTime = Date.now();
   misses = 0;
 }
 
 function logAttempt(){
   const li = document.createElement("li");
-  li.textContent = `${currentLettr}${misses === 0 ? " ✓" : " ✗-" + misses} (${((Date.now() - startTime) / 1000).toFixed(1)}s)`;
+  li.textContent = `${pyricLettr ? currentLettr.letter_rom[0].toUpperCase() : currentLettr.letter_rom[0]}${misses === 0 ? " ✓" : " ✗-" + misses} (${((Date.now() - startTime) / 1000).toFixed(1)}s)`;
   DOM.attemptsList.insertBefore(li, DOM.attemptsList.firstChild);
   DOM.attemptsList.scrollTop = 0;
 }
@@ -168,19 +157,38 @@ DOM.accentHueSlide.addEventListener("input", () => { accentHue = parseFloat(DOM.
 DOM.missesSlide.addEventListener("input", () =>    { maxMisses = parseInt(DOM.missesSlide.value) || 0; });
 DOM.timerSlide.addEventListener("input", () =>     { maxTime = parseInt(DOM.timerSlide.value) || 0; });
 
-const RESET = () => { updateLettrsList(); setRandomLettr(); clearAttemptsLog(); realStartTime = Date.now(); wins = 0; losses = 0; DOM.guessField.focus();};
-DOM.vowelsCheck.addEventListener("input",          RESET);
-DOM.pyricVowelsCheck.addEventListener("input",     RESET);
-DOM.consonantsCheck.addEventListener("input",      RESET);
+function RESET() {setRandomLettr(); clearAttemptsLog(); realStartTime = Date.now(); wins = 0; losses = 0; DOM.guessField.focus();};
+DOM.vowelsCheck.addEventListener("input",            RESET);
+DOM.pyricVowelsCheck.addEventListener("input",       RESET);
+DOM.consonantsCheck.addEventListener("input",        RESET);
 DOM.specialConsonantsCheck.addEventListener("input", RESET);
+DOM.timerSlide.addEventListener("input",        RESET);
+DOM.missesSlide.addEventListener("input", RESET);
+DOM.unredGlyphCheck.addEventListener("input", () => {
+  document.querySelectorAll(".glyph").forEach(el => {
+    if (DOM.unredGlyphCheck.checked) el.style.color = `hsl(var(--accent_hue), 100%, 30%)`;
+    else el.style.color = `#AC272B`;
+  });
+});
+DOM.unredGlyphCheck.dispatchEvent(new Event("input"));
+
 
 DOM.confirmBtn.addEventListener("click", () => {
-  if (DOM.guessField.value.length === 0) { handleWrong(true); return; }
-  if (DOM.guessField.value === "`") DOM.guessField.value = "'";
-  if (DOM.guessField.value === currentLettr) handleRight();
+  if (DOM.guessField.value.length === 0) {
+    handleWrong(true);
+    return;
+  }
+
+  const answers = currentLettr.letter_rom.map(r =>
+    pyricLettr ? r.toUpperCase() : r
+  );
+
+  if (answers.includes(DOM.guessField.value)) handleRight();
   else handleWrong();
+
   guessLightness = 50;
 });
+
 
 DOM.helpBtn.addEventListener("click", () => {DOM.helpOverlay.style.display = "flex"});
 DOM.helpClose.addEventListener("click", () => {DOM.helpOverlay.style.display = "none"});
@@ -192,6 +200,5 @@ window.addEventListener("click", e => {
 document.documentElement.style.setProperty("--guess-hue", 10);
 DOM.helpOverlay.style.display = "none";
 DOM.guessField.focus();
-updateLettrsList();
 setRandomLettr();
 mainLoop();
