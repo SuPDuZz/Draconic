@@ -138,3 +138,16 @@ progress {
 }
 
 /* this is such a mess */
+.fill {
+  height: 100%;
+}
+
+.glyph {
+  font-family: "SegoeUIDrac", sans-serif;
+  font-size: 140px;
+  color: #AC272B;
+
+  position: absolute;  /* out of document flow */
+  line-height: 0;
+}
+

@@ -3,8 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./shared/shared.css">
         <link rel="stylesheet" href="./css/lettrguessr.css">
         <script src="./js/lettrguessr.js" defer></script>
+        <script src="./js/alphabetMap.js"></script>
+
         <title>Draconic LettrGuessr by Lirox</title>
     </head>
     <body>
@@ -12,7 +15,8 @@
         <div class="wrap">
             <div class="card">
                 <h2>What's this?</h2>
-                <img id="lettr_image">
+                <div class="fill"></div>
+                <p class="glyph" id="lettr_text"></p>
                 <div class="typein">
                     <button id="help_button">HELP</button>
                     <input id="guess_field" type="text" maxlength="2" placeholder="Type romanized here">
@@ -60,6 +64,10 @@
                     <div class="setting">
                         <h2>Loop trough colors</h2>
                         <input type="checkbox" id="accent_hue_check" checked>
+                    </div>
+                    <div class="setting">
+                        <h2>Unred glyph</h2>
+                        <input type="checkbox" id="unred_glyph">
                     </div>
                 </div>
                 <div class="setting">
@@ -166,7 +174,7 @@
                     </tr>
                 </tbody>
                 </table>
-
+<!-- TODO: redo with charmap -->
 
             </div>
         </div>
