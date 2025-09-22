@@ -1,6 +1,6 @@
 const mainText = 'pronounced {name_ipa}, represented with a "{letter_rom}" in the romanized way of writing, and "{letter}" in normal. The symbol makes the sound {letter_ipa} when spoken.'
 const pyricHText = 'Letters containig /ħ/ are pronounced by dragon using /h/ and breathing out fire. Humans can use a lighter or stick to the /ħ/'
-const pyricVowelText = 'Some letters following by q̇ħóll are considered pyric, and pronounced by dragon breathing out fire. Humans can use a lighter or stick to alternative sound (see first allophone).'
+const pyricVowelText = 'Some letters following by q̇ħóll are considered pyric, and pronounced by dragon breathing out fire. Humans can use a lighter or stick to alternative sound.'
 const soundPath = "./assets/sound/symbol-"
 
 const allophones = {
@@ -414,8 +414,9 @@ window.alphabetMap = [
   { // 41
     name: 'á´',  name_ipa: "/ɑ̤ˤʔ/",
     letter: "á", letter_rom: ["A"], letter_ipa: "/ɑ̤ˤ/", letter_glyph: "\uE01c\uE028", letter_discord: ":a_::_pyr:",
-    text: mainText,
+    text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.75, "xoffset": -20},
     sound: soundPath+"6-5.mp3"
   },
 
@@ -423,36 +424,41 @@ window.alphabetMap = [
   { // 42
     name: 'ó´',  name_ipa: "/o̤ˤʔ/",
     letter: "ó", letter_rom: ["O"], letter_ipa: "/o̤ˤ/", letter_glyph: "\uE01d\uE028", letter_discord: ":o_::_pyr:",
-    text: mainText,
+    text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.55, "xoffset": -45},
     sound: soundPath+"7-0.mp3"
   },
   { // 43
     name: 'ú´',  name_ipa: "/ṳˤʔ/",
     letter: "ú", letter_rom: ["U"], letter_ipa: "/ṳˤ/", letter_glyph: "\uE01e\uE028", letter_discord: ":u_::_pyr:",
-    text: mainText,
+    text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.70, "xoffset": -15},
     sound: soundPath+"7-1.mp3"
   },
   { // 44
     name: 'â´',  name_ipa: "/ɑ̤ˤːʔ/",
     letter: "â", letter_rom: ["AA"], letter_ipa: "/ɑ̤ˤː/", letter_glyph: "\uE021\uE028", letter_discord: ":aa::_pyr:",
-    text: mainText,
+    text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.75, "xoffset": -20},
     sound: soundPath+"7-2.mp3"
   },
   { // 45
     name: 'ô´',  name_ipa: "/o̤ˤːʔ/",
     letter: "ô", letter_rom: ["OO"], letter_ipa: "/o̤ˤː/", letter_glyph: "\uE022\uE028", letter_discord: ":oo::_pyr:",
-    text: mainText,
+    text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.75, "xoffset": -20},
     sound: soundPath+"7-3.mp3"
   },
   { // 46
     name: 'û´',  name_ipa: "/ṳˤːʔ/",
     letter: "û", letter_rom: ["UU"], letter_ipa: "/ṳˤː/", letter_glyph: "\uE023\uE028", letter_discord: ":uu::_pyr:",
-    text: mainText,
+    text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.60, "xoffset": -40},
     sound: soundPath+"7-4.mp3"
   },
   { // 47
@@ -460,6 +466,7 @@ window.alphabetMap = [
     letter: "put seleng later", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE029", letter_discord: "::",
     text: "uhh well uhhhhhhhhhhhhhhhhhhhhhh",
     properties: [],
+    table_prop: {"size": 0.75, "нoffset": -20},
   },
 
 //row 8
@@ -468,6 +475,7 @@ window.alphabetMap = [
     letter: "put seleng later", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE02a", letter_discord: "::",
     text: "uhh well uhhhhhhhhhhhhhhhhhhhhhh",
     properties: [],
+    table_prop: {"size": 0.75, "yoffset": 15},
   },
   { // 49
     name: ' ',  name_ipa: "",
