@@ -39,7 +39,6 @@ let lettrsList = [];
 let timesList = [];
 let averateTimePerQuestion = 0;
 let currentLettr = qholl;
-let pyricLettr = false;
 let wins = 0;
 let losses = 0;
 let winrate = 0;
@@ -99,14 +98,10 @@ function setRandomLettr() {
     DOM.specialConsonantsCheck.checked
   );
 
-  if (!result) {
-    currentLettr = qholl;
-    pyricLettr = false;
-  } else {
-    [currentLettr, pyricLettr] = result;
-  }
+  if (!result) currentLettr = qholl;
+  else currentLettr = result;
 
-  DOM.lettrText.textContent = currentLettr.letter_glyph + (pyricLettr ? qholl.letter_glyph : "");
+  DOM.lettrText.textContent = currentLettr.letter_glyph;
 }
 
 
@@ -138,7 +133,7 @@ function skip(){
 
 function logAttempt(){
   const li = document.createElement("li");
-  li.textContent = `${pyricLettr ? currentLettr.letter_rom[0].toUpperCase() : currentLettr.letter_rom[0]}${misses === 0 ? " ✓" : " ✗-" + misses} (${((Date.now() - startTime) / 1000).toFixed(1)}s)`;
+  li.textContent = `${currentLettr.letter_rom[0]}${misses === 0 ? " ✓" : " ✗-" + misses} (${((Date.now() - startTime) / 1000).toFixed(1)}s)`;
   DOM.attemptsList.insertBefore(li, DOM.attemptsList.firstChild);
   DOM.attemptsList.scrollTop = 0;
 }
@@ -179,11 +174,7 @@ DOM.confirmBtn.addEventListener("click", () => {
     return;
   }
 
-  const answers = currentLettr.letter_rom.map(r =>
-    pyricLettr ? r.toUpperCase() : r
-  );
-
-  if (answers.includes(DOM.guessField.value)) handleRight();
+  if (DOM.guessField.value === currentLettr.letter || currentLettr.letter_rom.includes(DOM.guessField.value)) handleRight();
   else handleWrong();
 
   guessLightness = 50;

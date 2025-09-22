@@ -1,6 +1,5 @@
-console.log(document.getElementById('alphabet').innerHTML);
+// console.log(document.getElementById('alphabet').innerHTML); ??
 
-// TODO: redo using alphabetmap
 const modal = document.getElementById('modal');
 const modalGlyph = document.getElementById('modalGlyph');
 const modalText = document.getElementById('modalText');
@@ -24,34 +23,48 @@ const table = document.getElementById('alphabet');
 let sound;
 
 // generate table
-window.alphabetMap.forEach(row=>{
+function chunk(data, size = 6) {
+  const filtered = data.filter(e => {
+    if (!e) return false;
+    if (!e.properties) return true;
+    return !(
+      (Array.isArray(e.properties) && e.properties.includes(window.REG.SHEET_IGNORE)) ||
+      (!Array.isArray(e.properties) && e.properties[window.REG.SHEET_IGNORE])
+    );
+  });
+  const chunks = [];
+  for (let i = 0; i < filtered.length; i += size) {
+    chunks.push(filtered.slice(i, i + size));
+  }
+  return chunks;
+}
+
+const rows = chunk(window.alphabetMap, 6);
+
+rows.forEach(row => {
   const trNames = document.createElement('tr');
   const trGlyphs = document.createElement('tr');
 
-  row.forEach(entry=>{
+  row.forEach(entry => {
     const tdName = document.createElement('td');
     tdName.textContent = `${entry.letter} - ${entry.name}`;
 
     const tdGlyph = document.createElement('td');
-    tdGlyph.classList.add("glyph");
+    tdGlyph.classList.add('glyph');
 
     const span = document.createElement('span');
     span.textContent = entry.letter_glyph || '';
     span.style.display = 'inline-block';
     span.style.transformOrigin = 'center center';
 
-    tdName.addEventListener('click', ()=>{
-      openModal(entry)
-    });
-    tdGlyph.addEventListener('click', ()=>{
-      openModal(entry)
-    });
+    tdName.addEventListener('click', () => openModal(entry));
+    tdGlyph.addEventListener('click', () => openModal(entry));
 
     tdGlyph.appendChild(span);
     trNames.appendChild(tdName);
     trGlyphs.appendChild(tdGlyph);
 
-    setTimeout(()=>{
+    setTimeout(() => {
       const scaleExtra = entry.table_prop?.size || 1;
       const xOffset = entry.table_prop?.xoffset || 0;
       const yOffset = entry.table_prop?.yoffset || 0;
