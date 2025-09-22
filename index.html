@@ -9,6 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="./css/index.css?v=1" />
   <link rel="stylesheet" href="./shared/shared.css" />
+  <link rel="stylesheet" href="./shared/alphabet.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,29 +34,13 @@
     </div>
 
     <div class="alphabet-wrapper">
-      <table id="alphabet"></table>
+      <table id="alphabet" func="generate_alphabet"></table>
     </div>
 
     <div id="lessons">
       <a class="lesson-button" href="./lettrguessr.html">Lirox' Lettrguessr</a>
     </div>
   </main>
-
-  <!-- Modal Template -->
-  <div id="modal" class="modalWrap">
-    <div class="modalContent">
-      <button onclick="closeModal()" class="modalClose">&times;</button>
-      <div class="horisontalAlign">
-        <p id="modalGlyph" class="glyph"></p>
-        <div class="verticalAlign">
-          <p id="modalLabel">Label.</p>
-          <p id="modalText">Placeholder text for this grid square.</p>
-          <button onclick="playSound()" id="modalSound">Play Sound</button>
-        </div>
-      </div>
-      <table id="allophoneTable"></table>
-    </div>
-  </div>
 
   <!-- Footer -->
   <div id="footer-placeholder"></div>

@@ -1,0 +1,147 @@
+@font-face {
+  font-family: "SegoeUIDrac";
+  src: url("../assets/fonts/SegoeUIDrac.ttf") format("truetype");
+}
+
+/*alphabet table styling*/
+.alphabet-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#alphabet {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: max-content;
+}
+#alphabet tr:nth-child(odd) td {
+  background: #D16D6A;
+  height: 25px;
+  line-height: 25px;
+  font-weight: bolder;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000;
+  padding: 0;
+}
+#alphabet tr:nth-child(even) td {
+  background: #EECECD;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000;
+  padding: 0;
+}
+#alphabet tr:nth-child(even) td:hover {
+  background: #cdecee;
+}
+#alphabet td {
+  width: 95px;
+  padding: 0;
+}
+td.glyph span { /*styles the glyphs inside of every span of the alphabet table*/
+  position: relative;
+  top: -8px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 140px;
+  line-height: 110px;
+  width: 95px;
+  height: 110px;
+}
+
+/*wraps around the glyph and vertical align div*/
+.horisontalAlign {
+  display: flex;
+  align-items:start;
+  gap: 15px;
+  margin-top: 10px;
+}
+.horisontalAlign > .glyph { /*styles only the glyph inside horizontal Align*/
+  background-color: #EECECD;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 120px;
+  line-height: 110px;
+}
+.glyph {/*styles eventual future glyphs*/
+  font-family: "SegoeUIDrac", sans-serif;
+  color: #AC272B;
+  text-align: center;
+}
+
+/*vertical align is the div that wraps the name text and sound button of the modal*/
+.verticalAlign {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.verticalAlign p#modalLabel {
+  background-color: #D16D6A;
+  border: 1px solid black;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 1px 5px;
+}
+.verticalAlign p {
+  background-color: #EECECD;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+/*the allophone table underneath the horizontalAlign*/
+#allophoneTable td,
+#allophoneTable th {
+  border: 1px solid black;
+}
+
+#allophoneTable {
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#allophoneTable tr:first-child {
+  background-color: #D16D6A;
+}
+
+#allophoneTable tr:not(:first-child) {
+  background-color: #EECECD;
+}
+
+/*modal styling*/
+#modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.2);
+}
+.modalContent {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 100%;
+  background-color: #fff;
+  width: 300px;
+  background-image: url(https://supduzz.github.io/Draconic/assets/images/parchment.jpg);
+}
+#modalText {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.modalClose {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.8rem;
+  color: #6B7280;
+  border: none;
+}
+.modalClose:hover {
+  color: #000;
+}

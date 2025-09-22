@@ -1,7 +1,7 @@
 const mainText = 'pronounced {name_ipa}, represented with a "{letter_rom}" in the romanized way of writing, and "{letter}" in normal. The symbol makes the sound {letter_ipa} when spoken.'
 const pyricHText = 'Letters containig /ħ/ are pronounced by dragon using /h/ and breathing out fire. Humans can use a lighter or stick to the /ħ/'
 const pyricVowelText = 'Some letters following by q̇ħóll are considered pyric, and pronounced by dragon breathing out fire. Humans can use a lighter or stick to alternative sound.'
-const soundPath = "./assets/sound/symbol-"
+const soundPath = "https://supduzz.github.io/Draconic/assets/sound/symbol-" // for other ppl to use
 
 const allophones = {
   "before i": 'placed before "i" or "ī"',
@@ -599,5 +599,221 @@ function get_entry_by_discord(text) {
   return get_entry_by_field(text, "letter_discord");
 }
 
+function description(entry){
+  if(!entry.text) return '';
+  return entry.text
+    .replaceAll('{name}', entry.name||'')
+    .replaceAll('{name_ipa}', entry.name_ipa||'')
+    .replaceAll('{letter_rom}', entry.letter_rom?.join('" or a "')||'')
+    .replaceAll('{letter_ipa}', entry.letter_ipa||'')
+    .replaceAll('{letter}', entry.letter||'');
+}
 
-// function get_entries_from_text()
+
+
+// aaaaaaaaaaaaaaaaaa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function generate_alphabet() {
+  console.log("Generating alphabet table")
+  const table = document.getElementById('alphabet') || (document.body.appendChild(Object.assign(document.createElement('table'), {id:'alphabet'})), document.getElementById('alphabet'));
+
+  let sound;
+  // generate table
+  function chunk(data, size = 6) {
+    const filtered = data.filter(e => {
+      if (!e) return false;
+      if (!e.properties) return true;
+      return !(
+        (Array.isArray(e.properties) && e.properties.includes(window.REG.SHEET_IGNORE)) ||
+        (!Array.isArray(e.properties) && e.properties[window.REG.SHEET_IGNORE])
+      );
+    });
+    const chunks = [];
+    for (let i = 0; i < filtered.length; i += size) {
+      chunks.push(filtered.slice(i, i + size));
+    }
+    return chunks;
+  }
+
+  const rows = chunk(window.alphabetMap, 6);
+
+  rows.forEach(row => {
+    const trNames = document.createElement('tr');
+    const trGlyphs = document.createElement('tr');
+
+    row.forEach(entry => {
+      const tdName = document.createElement('td');
+      tdName.textContent = `${entry.letter} - ${entry.name}`;
+
+      const tdGlyph = document.createElement('td');
+      tdGlyph.classList.add('glyph');
+
+      const span = document.createElement('span');
+      span.textContent = entry.letter_glyph || '';
+      span.style.display = 'inline-block';
+      span.style.transformOrigin = 'center center';
+
+      tdName.addEventListener('click', () => openModal(entry));
+      tdGlyph.addEventListener('click', () => openModal(entry));
+
+      tdGlyph.appendChild(span);
+      trNames.appendChild(tdName);
+      trGlyphs.appendChild(tdGlyph);
+
+      setTimeout(() => {
+        const scaleExtra = entry.table_prop?.size || 1;
+        const xOffset = entry.table_prop?.xoffset || 0;
+        const yOffset = entry.table_prop?.yoffset || 0;
+        span.style.transform = `scale(${scaleExtra}) translateX(${xOffset}px) translateY(${yOffset}px)`;
+      });
+    });
+
+    table.appendChild(trNames);
+    table.appendChild(trGlyphs);
+  });
+
+  let audio;
+  function playSound() { // when playsound button hit
+    audio = new Audio(sound);
+    if (audio.pause) {
+      audio.play(); //play sound
+    }
+  }
+
+  function closeModal() { //when closed
+    modal.style.display="none"; // hide modal
+  }
+
+  const modal = document.getElementById('modal') || (() => {
+      const m = document.createElement('div');
+      m.id = 'modal';
+      m.className = 'modalWrap';
+      m.innerHTML = `
+        <div class="modalContent">
+          <button class="modalClose">&times;</button>
+          <div class="horisontalAlign">
+            <p id="modalGlyph" class="glyph"></p>
+            <div class="verticalAlign">
+              <p id="modalLabel">Label.</p>
+              <p id="modalText">Placeholder text for this grid square.</p>
+              <button id="modalSound">Play Sound</button>
+            </div>
+          </div>
+          <table id="allophoneTable"></table>
+        </div>`;
+      document.body.appendChild(m);
+      return m;
+  })();
+
+  const closeBtn = modal.querySelector('.modalClose');
+  closeBtn.onclick = () => closeModal();
+
+  const playBtn = modal.querySelector('#modalSound');
+  playBtn.onclick = () => playSound();
+
+
+  const modalGlyph = document.getElementById('modalGlyph');
+  const modalText = document.getElementById('modalText');
+  const allophoneTable = document.getElementById('allophoneTable');
+  const modalLabel = document.getElementById('modalLabel');
+
+  //modal function with the number from the buttons
+  function openModal(entry) {
+    if (entry.text === "") return;
+    modalLabel.textContent = entry.name;
+    modalText.textContent = description(entry);
+    modalGlyph.textContent = entry.letter_glyph;
+    sound = entry.sound;
+    // Allophones
+    allophoneTable.innerHTML = "";
+    if (entry.allophones && Object.keys(entry.allophones).length > 0) {
+      allophoneTable.style.display = "table";
+
+      const header = document.createElement("tr");
+      ["Allophone", "Condition"].forEach(text => {
+        const th = document.createElement("th");
+        th.textContent = text;
+        header.appendChild(th);
+      });
+      allophoneTable.appendChild(header);
+
+      for (const symbol in entry.allophones) {
+        const tr = document.createElement("tr");
+        const tdSymbol = document.createElement("td");
+        tdSymbol.textContent = symbol;
+        const tdCond = document.createElement("td");
+        tdCond.textContent = entry.allophones[symbol];
+        tr.appendChild(tdSymbol);
+        tr.appendChild(tdCond);
+        allophoneTable.appendChild(tr);
+      }
+    } else {
+      allophoneTable.style.display = "none";
+    }
+
+    modal.style.display = "flex";
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  window.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
+  console.log("Generated alphabet table")
+  
+  console.log(modal)
+  console.log(table)
+
+  openModal()
+}
+
+
+// functions in html
+const functions = {
+  get_random_entry,
+  entries_from_field,
+  text_to_entries,
+  discord_to_entries,
+  glyphs_to_entries,
+  entries_to_glyphs,
+  entries_to_rom,
+  entries_to_text,
+  entries_to_discord,
+  get_entry_by_id,
+  get_entry_by_field,
+  get_entry_by_letter,
+  get_entry_by_rom,
+  get_entry_by_glyph,
+  get_entry_by_discord,
+  generate_alphabet,
+  description
+};
+
+function applyPipeline(chain, input) {
+  return chain.split(/\s+/).reduce((val, fnName) => {
+    const fn = functions[fnName];
+    return fn ? fn(val) : val;
+  }, input);
+}
+
+document.querySelectorAll('[func]').forEach(el => {
+  const chain = el.getAttribute('func');
+  el.textContent = applyPipeline(chain, el.textContent);
+});
