@@ -25,7 +25,8 @@ window.REG.VOWEL = window.REG.auto();
 window.REG.CONSONANT = window.REG.auto();
 window.REG.PYRIC = window.REG.auto();
 window.REG.SHEET_IGNORE = window.REG.auto();
- 
+window.REG.OPTIONAL = window.REG.auto();
+
 // charmap
 window.alphabetMap = [
 //row 0
@@ -412,7 +413,7 @@ window.alphabetMap = [
     sound: soundPath+"6-4.mp3"
   },
   { // 41
-    name: 'á´',  name_ipa: "/ɑ̤ˤʔ/",
+    name: 'á´',  name_ipa: "/ɑ̤ˤʔ/", 
     letter: "á", letter_rom: ["A"], letter_ipa: "/ɑ̤ˤ/", letter_glyph: "\uE01c\uE028", letter_discord: ":a_::_pyr:",
     text: mainText + " " + pyricVowelText,
     properties: [window.REG.VOWEL, window.REG.PYRIC],
@@ -501,30 +502,55 @@ function get_random_entry(vowels = true, consonants = true, pyric_vowels = true,
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-function entries_from_field(text, fieldNames) {
+function entries_from_field(text, fieldNames, filter_brackets = false) {
   const result = [];
   let i = 0;
 
   while (i < text.length) {
-    let match = null;
-    let matchLength = 0;
+    let best = null;
+    let bestValLen = -1;
+    let bestAdvance = 0;
 
     for (const e of window.alphabetMap) {
       for (const field of fieldNames) {
         const values = Array.isArray(e[field]) ? e[field] : [e[field]];
         for (const val of values) {
           if (!val) continue;
-          if (text.slice(i, i + val.length) === val && val.length > matchLength) {
-            match = e;
-            matchLength = val.length;
+
+          const valLen = val.length;
+          const plainSlice = text.slice(i, i + valLen);
+          if (plainSlice === val) {
+            const advance = valLen;
+            if (valLen > bestValLen || (valLen === bestValLen && advance > bestAdvance)) {
+              const match = { ...e };
+              match._advance = advance;
+              best = match;
+              bestValLen = valLen;
+              bestAdvance = advance;
+            }
+          }
+
+          const parenSlice = text.slice(i, i + valLen + 2);
+          if (parenSlice.length === valLen + 2 && parenSlice[0] === '(' && parenSlice[parenSlice.length - 1] === ')' && parenSlice.slice(1, 1 + valLen) === val) {
+            const advance = filter_brackets ? valLen : valLen + 2;
+            const match = { ...e };
+            match.properties = [...(match.properties || []), window.REG.OPTIONAL];
+            match._advance = advance;
+            if (valLen > bestValLen || (valLen === bestValLen && advance > bestAdvance)) {
+              best = match;
+              bestValLen = valLen;
+              bestAdvance = advance;
+            }
           }
         }
       }
     }
 
-    if (match) {
-      result.push(match);
-      i += matchLength;
+    if (best) {
+      const advance = best._advance || bestValLen;
+      delete best._advance;
+      result.push(best);
+      i += advance;
     } else {
       i++;
     }
@@ -532,6 +558,8 @@ function entries_from_field(text, fieldNames) {
 
   return result;
 }
+
+
 
 function text_to_entries(text) {
   return entries_from_field(text, ["letter", "letter_rom"]);
@@ -607,6 +635,15 @@ function description(entry){
     .replaceAll('{letter_rom}', entry.letter_rom?.join('" or a "')||'')
     .replaceAll('{letter_ipa}', entry.letter_ipa||'')
     .replaceAll('{letter}', entry.letter||'');
+}
+
+function get_pyric_equivalent(entry) {
+    if (!entry || !entry.properties.includes(window.REG.VOWEL)) return null;
+    return window.alphabetMap.find(e =>
+        e.properties.includes(window.REG.VOWEL) &&
+        e.properties.includes(window.REG.PYRIC) &&
+        e.letter_rom.some(l => l.toLowerCase() === entry.letter_rom[0].toLowerCase())
+    ) || null;
 }
 
 
