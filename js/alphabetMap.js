@@ -510,6 +510,7 @@ function entries_from_field(text, fieldNames, filter_brackets = false) {
     let best = null;
     let bestValLen = -1;
     let bestAdvance = 0;
+    let bestIsParenthesized = false;
 
     for (const e of window.alphabetMap) {
       for (const field of fieldNames) {
@@ -518,28 +519,43 @@ function entries_from_field(text, fieldNames, filter_brackets = false) {
           if (!val) continue;
 
           const valLen = val.length;
+          
           const plainSlice = text.slice(i, i + valLen);
           if (plainSlice === val) {
             const advance = valLen;
             if (valLen > bestValLen || (valLen === bestValLen && advance > bestAdvance)) {
               const match = { ...e };
               match._advance = advance;
+              match._isParenthesized = false;
               best = match;
               bestValLen = valLen;
               bestAdvance = advance;
+              bestIsParenthesized = false;
             }
           }
 
-          const parenSlice = text.slice(i, i + valLen + 2);
-          if (parenSlice.length === valLen + 2 && parenSlice[0] === '(' && parenSlice[parenSlice.length - 1] === ')' && parenSlice.slice(1, 1 + valLen) === val) {
-            const advance = filter_brackets ? valLen : valLen + 2;
-            const match = { ...e };
-            match.properties = [...(match.properties || []), window.REG.OPTIONAL];
-            match._advance = advance;
-            if (valLen > bestValLen || (valLen === bestValLen && advance > bestAdvance)) {
-              best = match;
-              bestValLen = valLen;
-              bestAdvance = advance;
+          if (i < text.length - valLen - 1 && text[i] === '(') {
+            const parenSlice = text.slice(i, i + valLen + 2);
+            if (parenSlice[parenSlice.length - 1] === ')' && 
+                parenSlice.slice(1, 1 + valLen) === val) {
+              
+              const advance = valLen + 2;
+              const match = { ...e };
+              match.properties = [...(match.properties || []), window.REG.OPTIONAL];
+              match._advance = advance;
+              match._isParenthesized = true;
+              
+              const currentBestLength = bestValLen;
+              const isBetter = valLen > bestValLen || 
+                             (valLen === bestValLen && advance > bestAdvance) ||
+                             (valLen === bestValLen && bestIsParenthesized === false);
+              
+              if (isBetter) {
+                best = match;
+                bestValLen = valLen;
+                bestAdvance = advance;
+                bestIsParenthesized = true;
+              }
             }
           }
         }
@@ -547,9 +563,17 @@ function entries_from_field(text, fieldNames, filter_brackets = false) {
     }
 
     if (best) {
-      const advance = best._advance || bestValLen;
+      const advance = best._advance;
       delete best._advance;
-      result.push(best);
+      
+      if (filter_brackets && best._isParenthesized) {
+        delete best._isParenthesized;
+        result.push(best);
+      } else {
+        delete best._isParenthesized;
+        result.push(best);
+      }
+      
       i += advance;
     } else {
       i++;
@@ -558,7 +582,6 @@ function entries_from_field(text, fieldNames, filter_brackets = false) {
 
   return result;
 }
-
 
 
 function text_to_entries(text) {
@@ -820,6 +843,107 @@ function generate_alphabet() {
 
   openModal()
 }
+
+gednder_overrides = {
+    "animates": ["e", "r", "mon", "i"],
+    "animate": ["e", "r", "mon", "i"], // AAAAAAAAAA INCONSISTANT
+    "inanimates": ["mag", "mun", "a"],
+    "inanimate": ["mag", "mun", "a"],
+    "all": ["e", "r", "mon", "i", "mag", "mun", "a"]
+}
+
+noun_forms = { // im indeed crazy porting all o this from exel to js
+    "e": {
+        "singular": {1: "ēn", 2: "æn", 3: "ēn", 4: "ħán"},
+        "dual":     {1: "(ē)χen", 2: "(y)χen", 3: "(o)χen", 4: "ħóχħon"},
+        "plural":   {1: "illyn", 2: "ān", 3: "ē'yn", 4: "q̇yn"}
+    },
+    "r": {
+        "singular": {1: "ēf", 2: "(a)xef", 3: "lef", 4: "lef"},
+        "dual":     {1: "eχef", 2: "hyf", 3: "(o)χef", 4: "(o)χef"},
+        "plural":   {1: "yf", 2: "hyf", 3: "'yf", 4: "'yf"}
+    },
+    "mon": {
+        "singular": {1: "ô", 2: "ô", 3: "ô", 4: "ô"},
+        "dual":     {1: "yħq̇ô", 2: "q̇ô", 3: "q̇ô", 4: "ûq̇ô"},
+        "plural":   {1: "oħô", 2: "q̇ô", 3: "q̇ô", 4: "ûq̇ô"}
+    },
+    "i": {
+        "singular": {1: "llūl", 2: "cūl", 3: "cūl", 4: "cūl"},
+        "dual":     {1: "(æ)llūl", 2: "(')illūl", 3: "(')illūl", 4: "(')illūl"},
+        "plural":   {1: "(æ)llūl", 2: "(')illūl", 3: "(')illūl", 4: "(')illūl"}
+    },
+    "mag": {
+        "singular": {1: "(ō)χ", 2: "huχ", 3: "huχ", 4: "q̇ħúχ"},
+        "dual":     {1: "uχ", 2: "'ūχ", 3: "'ūχ", 4: "(')ūχ"},
+        "plural":   {1: "uχ", 2: "'ūχ", 3: "'ūχ", 4: "(')ūχ"}
+    },
+    "mun": {
+        "singular": {1: "(e)rk", 2: "tyk", 3: "tyk", 4: "(á)rk"},
+        "dual":     {1: "ōrk", 2: "ōrk", 3: "ōrk", 4: "(')urk"},
+        "plural":   {1: "ōrk", 2: "ōrk", 3: "ōrk", 4: "(')urk"}
+    },
+    "a": {
+        "singular": {1: "(y)q̇", 2: "(o)q̇", 3: "(o)q̇", 4: "(ú)ħáq̇"},
+        "dual":     {1: "āq̇", 2: "ōq̇", 3: "ōq̇", 4: "ūq̇"},
+        "plural":   {1: "āq̇", 2: "ōq̇", 3: "ōq̇", 4: "ūq̇"}
+    }
+}
+
+// we need a fuckin uhhhh uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
+function get_suffix(declension, number, gender) {
+    if (!noun_forms[gender]) return null;
+    if (!noun_forms[gender][number]) return null;
+    return noun_forms[gender][number][declension] || null;
+}
+
+function connect_split(prefix = "", text = "", suffix = "") {
+    let text_entries = text_to_entries(text);
+    let prefix_entries = text_to_entries(prefix);
+    let suffix_entries = text_to_entries(suffix);
+    if (!text_entries) return []; 
+    const last_text = text_entries[text_entries.length - 1];
+    const first_text = text_entries[0];
+
+    if (prefix_entries) {
+        // No rules?
+    }
+
+    if (suffix_entries) {
+        let first_suffix = suffix_entries[0];
+
+        if (first_suffix) {
+            if (first_suffix.properties.includes(window.REG.VOWEL)) {
+                if (first_suffix.properties.includes(window.REG.OPTIONAL)) {
+                    if (last_text && last_text.properties.includes(window.REG.VOWEL)) {
+                        suffix_entries.shift();
+                    }
+                } else if (last_text && last_text.properties.includes(window.REG.VOWEL)) {
+                    if (last_text.properties.includes(window.REG.PYRIC)) {
+                        const pyric = get_pyric_equivalent(first_suffix);
+                        if (pyric) first_suffix = pyric;
+                        suffix_entries[0] = first_suffix;
+                    }
+                }
+            } else if (first_suffix.properties.includes(window.REG.CONSONANT) && first_suffix.properties.includes(window.REG.OPTIONAL)) {
+                if (!last_text || !last_text.properties.includes(window.REG.VOWEL)) {
+                    suffix_entries.shift();
+                }
+            }
+        }
+    }
+
+    return [prefix_entries, text_entries, suffix_entries];
+}
+
+function connect(prefix = "", text = "", suffix = "") {
+    const entries = connect_split(prefix, text, suffix);
+    return entries.flat();
+}
+
+function connect_suffix(text, suffix) {return connect("", text, suffix)}
+function connect_prefix(text, prefix) {return connect(prefix, text, "")}
 
 
 // functions in html
