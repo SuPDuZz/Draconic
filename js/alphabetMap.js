@@ -925,6 +925,7 @@ function connect_split(prefix = "", text = "", suffix = "") {
                         if (pyric) first_suffix = pyric;
                         suffix_entries[0] = first_suffix;
                     }
+                    text_entries.pop();
                 }
             } else if (first_suffix.properties.includes(window.REG.CONSONANT) && first_suffix.properties.includes(window.REG.OPTIONAL)) {
                 if (!last_text || !last_text.properties.includes(window.REG.VOWEL)) {
