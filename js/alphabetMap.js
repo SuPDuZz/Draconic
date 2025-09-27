@@ -26,7 +26,8 @@ window.REG.CONSONANT = window.REG.auto();
 window.REG.PYRIC = window.REG.auto();
 window.REG.SHEET_IGNORE = window.REG.auto();
 window.REG.DIFFERENT = window.REG.auto();
- 
+window.REG.OPTIONAL = window.REG.auto();
+
 // charmap
 window.alphabetMap = [
 //row 0
@@ -505,30 +506,79 @@ function get_random_entry(vowels = true, consonants = true, pyric_vowels = true,
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-function entries_from_field(text, fieldNames) {
+function entries_from_field(text, fieldNames, filter_brackets = false) {
   const result = [];
   let i = 0;
 
   while (i < text.length) {
-    let match = null;
-    let matchLength = 0;
+    let best = null;
+    let bestValLen = -1;
+    let bestAdvance = 0;
+    let bestIsParenthesized = false;
 
     for (const e of window.alphabetMap) {
       for (const field of fieldNames) {
         const values = Array.isArray(e[field]) ? e[field] : [e[field]];
         for (const val of values) {
           if (!val) continue;
-          if (text.slice(i, i + val.length) === val && val.length > matchLength) {
-            match = e;
-            matchLength = val.length;
+
+          const valLen = val.length;
+          
+          const plainSlice = text.slice(i, i + valLen);
+          if (plainSlice === val) {
+            const advance = valLen;
+            if (valLen > bestValLen || (valLen === bestValLen && advance > bestAdvance)) {
+              const match = { ...e };
+              match._advance = advance;
+              match._isParenthesized = false;
+              best = match;
+              bestValLen = valLen;
+              bestAdvance = advance;
+              bestIsParenthesized = false;
+            }
+          }
+
+          if (i < text.length - valLen - 1 && text[i] === '(') {
+            const parenSlice = text.slice(i, i + valLen + 2);
+            if (parenSlice[parenSlice.length - 1] === ')' && 
+                parenSlice.slice(1, 1 + valLen) === val) {
+              
+              const advance = valLen + 2;
+              const match = { ...e };
+              match.properties = [...(match.properties || []), window.REG.OPTIONAL];
+              match._advance = advance;
+              match._isParenthesized = true;
+              
+              const currentBestLength = bestValLen;
+              const isBetter = valLen > bestValLen || 
+                             (valLen === bestValLen && advance > bestAdvance) ||
+                             (valLen === bestValLen && bestIsParenthesized === false);
+              
+              if (isBetter) {
+                best = match;
+                bestValLen = valLen;
+                bestAdvance = advance;
+                bestIsParenthesized = true;
+              }
+            }
           }
         }
       }
     }
 
-    if (match) {
-      result.push(match);
-      i += matchLength;
+    if (best) {
+      const advance = best._advance;
+      delete best._advance;
+      
+      if (filter_brackets && best._isParenthesized) {
+        delete best._isParenthesized;
+        result.push(best);
+      } else {
+        delete best._isParenthesized;
+        result.push(best);
+      }
+      
+      i += advance;
     } else {
       i++;
     }
@@ -536,6 +586,7 @@ function entries_from_field(text, fieldNames) {
 
   return result;
 }
+
 
 function text_to_entries(text) {
   return entries_from_field(text, ["letter", "letter_rom"]);
