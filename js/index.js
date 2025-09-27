@@ -98,7 +98,6 @@ function generate_alphabet() {
   const playBtn = modal.querySelector('#modalSound');
   playBtn.onclick = () => playSound();
 
-
   const modalGlyph = document.getElementById('modalGlyph');
   const modalText = document.getElementById('modalText');
   const allophoneTable = document.getElementById('allophoneTable');
@@ -111,6 +110,11 @@ function generate_alphabet() {
     modalText.textContent = description(entry);
     modalGlyph.textContent = entry.letter_glyph;
     sound = entry.sound;
+
+    playBtn.style.display = entry.properties.includes(window.REG.DIFFERENT)
+      ? "none"
+      : "block";
+
     // Allophones
     allophoneTable.innerHTML = "";
     if (entry.allophones && Object.keys(entry.allophones).length > 0) {
