@@ -804,7 +804,9 @@ function applyPipeline(chain, input) {
   }, input);
 }
 
-document.querySelectorAll('[func]').forEach(el => {
-  const chain = el.getAttribute('func');
-  el.textContent = applyPipeline(chain, el.textContent);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('[func]').forEach(el => {
+    const chain = el.getAttribute('func');
+    el.textContent = applyPipeline(chain, el.textContent, el);
+  });
 });
