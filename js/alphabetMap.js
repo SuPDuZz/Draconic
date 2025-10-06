@@ -25,6 +25,7 @@ window.REG.VOWEL = window.REG.auto();
 window.REG.CONSONANT = window.REG.auto();
 window.REG.PYRIC = window.REG.auto();
 window.REG.SHEET_IGNORE = window.REG.auto();
+window.REG.DIFFERENT = window.REG.auto();
 window.REG.OPTIONAL = window.REG.auto();
 
 // charmap
@@ -367,7 +368,7 @@ window.alphabetMap = [
   },
   { // 37
     name: 'má',  name_ipa: "/m̥ɑ̤ˤ/",
-    letter: "m", letter_rom: ["m"], letter_ipa: "/m̥/", letter_glyph: "\uE025", letter_discord: ":m_:",
+    letter: "m", letter_rom: ["m"], letter_ipa: "/m/", letter_glyph: "\uE025", letter_discord: ":m_:",
     text: mainText,
     properties: [window.REG.CONSONANT],
     allophones: {"/m̥/": "word-init"},
@@ -397,6 +398,75 @@ window.alphabetMap = [
     sound: soundPath+"6-3.mp3"
   },
   { // 40
+    name: 'á´',  name_ipa: "/ɑ̤ˤʔ/",
+    letter: "á", letter_rom: ["A"], letter_ipa: "/ɑ̤ˤ/", letter_glyph: "\uE01c\uE028", letter_discord: ":a_::_pyr:",
+    text: mainText + " " + pyricVowelText,
+    properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.75, "xoffset": -20},
+    sound: soundPath+"6-5.mp3"
+  },
+  { // 41
+    name: 'ó´',  name_ipa: "/o̤ˤʔ/",
+    letter: "ó", letter_rom: ["O"], letter_ipa: "/o̤ˤ/", letter_glyph: "\uE01d\uE028", letter_discord: ":o_::_pyr:",
+    text: mainText + " " + pyricVowelText,
+    properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.55, "xoffset": -45},
+    sound: soundPath+"7-0.mp3"
+  },
+// row 7
+  { // 42
+    name: 'ú´',  name_ipa: "/ṳˤʔ/",
+    letter: "ú", letter_rom: ["U"], letter_ipa: "/ṳˤ/", letter_glyph: "\uE01e\uE028", letter_discord: ":u_::_pyr:",
+    text: mainText + " " + pyricVowelText,
+    properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.70, "xoffset": -15},
+    sound: soundPath+"7-1.mp3"
+  },
+  { // 43
+    name: 'â´',  name_ipa: "/ɑ̤ˤːʔ/",
+    letter: "â", letter_rom: ["AA"], letter_ipa: "/ɑ̤ˤː/", letter_glyph: "\uE021\uE028", letter_discord: ":aa::_pyr:",
+    text: mainText + " " + pyricVowelText,
+    properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.75, "xoffset": -20},
+    sound: soundPath+"7-2.mp3"
+  },
+  { // 44
+    name: 'ô´',  name_ipa: "/o̤ˤːʔ/",
+    letter: "ô", letter_rom: ["OO"], letter_ipa: "/o̤ˤː/", letter_glyph: "\uE022\uE028", letter_discord: ":oo::_pyr:",
+    text: mainText + " " + pyricVowelText,
+    properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.75, "xoffset": -20},
+    sound: soundPath+"7-3.mp3"
+  },
+  { // 45
+    name: 'û´',  name_ipa: "/ṳˤːʔ/",
+    letter: "û", letter_rom: ["UU"], letter_ipa: "/ṳˤː/", letter_glyph: "\uE023\uE028", letter_discord: ":uu::_pyr:",
+    text: mainText + " " + pyricVowelText,
+    properties: [window.REG.VOWEL, window.REG.PYRIC],
+    table_prop: {"size": 0.60, "xoffset": -40},
+    sound: soundPath+"7-4.mp3"
+  },
+  { // 46
+    name: 'q̇em',  name_ipa: "/ʡem/",
+    letter: "", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE029", letter_discord: ":Qem:",
+    text: `{name} pronounced {name_ipa}, unlike most of the other symbols, this one doesn't have a direct translation to a romanized way of writing. \n
+    In draconic the symbol has three different uses, it can be used as a rough equivelent of a hyphen, which means it can be optionally used to connect compounds or conjoin propositions to their nouns.\n
+    It can also stand in for the number 0, or proceed a string of letters to indicate that they are numbers.\n
+    In shorthand writing, it can also stand in for the word q̇e that means 'none'`,
+    properties: [window.REG.DIFFERENT],
+    table_prop: {"size": 0.75, "yoffset": -20},
+  },
+  { // 47
+    name: 'seleŋ',  name_ipa: "/s̠el̪eŋ/",
+    letter: "", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE02a", letter_discord: ":seleng:",
+    text: `{name} pronounced {name_ipa}, unlike most of the other symbols, this one doesn't have a direct translation to a romanized way of writing. \n
+    It can however be used as a rough equivalent of a quotation mark or an asterisk. It can optionally be used to mark parentheticals, quotes, proper nouns, or even just for emphasis. \n
+    Though it is seldom used in formal writing.`,
+    properties: [window.REG.DIFFERENT],
+    table_prop: {"size": 0.75, "yoffset": 15},
+  },
+  //row 8
+  { // 48
     name: 'q̇ħóll',  name_ipa: "/ʡho̤ˤɬ/",
     letter: "", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE028", letter_discord: ":_pyr:",
     text: "{name} pronounced {name_ipa} is the symbol representing pyrification it does not do anything in and of its own. It however changes vowels to pyric vowels when placed after one. Pyric letters pronounced are by dragons breathing out fire, humans can use a ligher or stick to alternative sound (see allophones).",
@@ -412,72 +482,6 @@ window.alphabetMap = [
     },
     sound: soundPath+"6-4.mp3"
   },
-  { // 41
-    name: 'á´',  name_ipa: "/ɑ̤ˤʔ/", 
-    letter: "á", letter_rom: ["A"], letter_ipa: "/ɑ̤ˤ/", letter_glyph: "\uE01c\uE028", letter_discord: ":a_::_pyr:",
-    text: mainText + " " + pyricVowelText,
-    properties: [window.REG.VOWEL, window.REG.PYRIC],
-    table_prop: {"size": 0.75, "xoffset": -20},
-    sound: soundPath+"6-5.mp3"
-  },
-
-// row 7
-  { // 42
-    name: 'ó´',  name_ipa: "/o̤ˤʔ/",
-    letter: "ó", letter_rom: ["O"], letter_ipa: "/o̤ˤ/", letter_glyph: "\uE01d\uE028", letter_discord: ":o_::_pyr:",
-    text: mainText + " " + pyricVowelText,
-    properties: [window.REG.VOWEL, window.REG.PYRIC],
-    table_prop: {"size": 0.55, "xoffset": -45},
-    sound: soundPath+"7-0.mp3"
-  },
-  { // 43
-    name: 'ú´',  name_ipa: "/ṳˤʔ/",
-    letter: "ú", letter_rom: ["U"], letter_ipa: "/ṳˤ/", letter_glyph: "\uE01e\uE028", letter_discord: ":u_::_pyr:",
-    text: mainText + " " + pyricVowelText,
-    properties: [window.REG.VOWEL, window.REG.PYRIC],
-    table_prop: {"size": 0.70, "xoffset": -15},
-    sound: soundPath+"7-1.mp3"
-  },
-  { // 44
-    name: 'â´',  name_ipa: "/ɑ̤ˤːʔ/",
-    letter: "â", letter_rom: ["AA"], letter_ipa: "/ɑ̤ˤː/", letter_glyph: "\uE021\uE028", letter_discord: ":aa::_pyr:",
-    text: mainText + " " + pyricVowelText,
-    properties: [window.REG.VOWEL, window.REG.PYRIC],
-    table_prop: {"size": 0.75, "xoffset": -20},
-    sound: soundPath+"7-2.mp3"
-  },
-  { // 45
-    name: 'ô´',  name_ipa: "/o̤ˤːʔ/",
-    letter: "ô", letter_rom: ["OO"], letter_ipa: "/o̤ˤː/", letter_glyph: "\uE022\uE028", letter_discord: ":oo::_pyr:",
-    text: mainText + " " + pyricVowelText,
-    properties: [window.REG.VOWEL, window.REG.PYRIC],
-    table_prop: {"size": 0.75, "xoffset": -20},
-    sound: soundPath+"7-3.mp3"
-  },
-  { // 46
-    name: 'û´',  name_ipa: "/ṳˤːʔ/",
-    letter: "û", letter_rom: ["UU"], letter_ipa: "/ṳˤː/", letter_glyph: "\uE023\uE028", letter_discord: ":uu::_pyr:",
-    text: mainText + " " + pyricVowelText,
-    properties: [window.REG.VOWEL, window.REG.PYRIC],
-    table_prop: {"size": 0.60, "xoffset": -40},
-    sound: soundPath+"7-4.mp3"
-  },
-  { // 47
-    name: 'put qem later',  name_ipa: "",
-    letter: "put seleng later", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE029", letter_discord: "::",
-    text: "uhh well uhhhhhhhhhhhhhhhhhhhhhh",
-    properties: [],
-    table_prop: {"size": 0.75, "нoffset": -20},
-  },
-
-//row 8
-  { // 48
-    name: 'put seleng later',  name_ipa: "",
-    letter: "put seleng later", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE02a", letter_discord: "::",
-    text: "uhh well uhhhhhhhhhhhhhhhhhhhhhh",
-    properties: [],
-    table_prop: {"size": 0.75, "yoffset": 15},
-  },
   { // 49
     name: ' ',  name_ipa: "",
     letter: " ", letter_rom: [" "], letter_ipa: "", letter_glyph: " ", letter_discord: "   ",
@@ -485,6 +489,7 @@ window.alphabetMap = [
     properties: [window.REG.SHEET_IGNORE],
   }
 ];
+
 
 function get_random_entry(vowels = true, consonants = true, pyric_vowels = true, pyric_consonants = true) {
   const pool = [];
@@ -669,181 +674,6 @@ function get_pyric_equivalent(entry) {
     ) || null;
 }
 
-
-
-// aaaaaaaaaaaaaaaaaa
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function generate_alphabet() {
-  console.log("Generating alphabet table")
-  const table = document.getElementById('alphabet') || (document.body.appendChild(Object.assign(document.createElement('table'), {id:'alphabet'})), document.getElementById('alphabet'));
-
-  let sound;
-  // generate table
-  function chunk(data, size = 6) {
-    const filtered = data.filter(e => {
-      if (!e) return false;
-      if (!e.properties) return true;
-      return !(
-        (Array.isArray(e.properties) && e.properties.includes(window.REG.SHEET_IGNORE)) ||
-        (!Array.isArray(e.properties) && e.properties[window.REG.SHEET_IGNORE])
-      );
-    });
-    const chunks = [];
-    for (let i = 0; i < filtered.length; i += size) {
-      chunks.push(filtered.slice(i, i + size));
-    }
-    return chunks;
-  }
-
-  const rows = chunk(window.alphabetMap, 6);
-
-  rows.forEach(row => {
-    const trNames = document.createElement('tr');
-    const trGlyphs = document.createElement('tr');
-
-    row.forEach(entry => {
-      const tdName = document.createElement('td');
-      tdName.textContent = `${entry.letter} - ${entry.name}`;
-
-      const tdGlyph = document.createElement('td');
-      tdGlyph.classList.add('glyph');
-
-      const span = document.createElement('span');
-      span.textContent = entry.letter_glyph || '';
-      span.style.display = 'inline-block';
-      span.style.transformOrigin = 'center center';
-
-      tdName.addEventListener('click', () => openModal(entry));
-      tdGlyph.addEventListener('click', () => openModal(entry));
-
-      tdGlyph.appendChild(span);
-      trNames.appendChild(tdName);
-      trGlyphs.appendChild(tdGlyph);
-
-      setTimeout(() => {
-        const scaleExtra = entry.table_prop?.size || 1;
-        const xOffset = entry.table_prop?.xoffset || 0;
-        const yOffset = entry.table_prop?.yoffset || 0;
-        span.style.transform = `scale(${scaleExtra}) translateX(${xOffset}px) translateY(${yOffset}px)`;
-      });
-    });
-
-    table.appendChild(trNames);
-    table.appendChild(trGlyphs);
-  });
-
-  let audio;
-  function playSound() { // when playsound button hit
-    audio = new Audio(sound);
-    if (audio.pause) {
-      audio.play(); //play sound
-    }
-  }
-
-  function closeModal() { //when closed
-    modal.style.display="none"; // hide modal
-  }
-
-  const modal = document.getElementById('modal') || (() => {
-      const m = document.createElement('div');
-      m.id = 'modal';
-      m.className = 'modalWrap';
-      m.innerHTML = `
-        <div class="modalContent">
-          <button class="modalClose">&times;</button>
-          <div class="horisontalAlign">
-            <p id="modalGlyph" class="glyph"></p>
-            <div class="verticalAlign">
-              <p id="modalLabel">Label.</p>
-              <p id="modalText">Placeholder text for this grid square.</p>
-              <button id="modalSound">Play Sound</button>
-            </div>
-          </div>
-          <table id="allophoneTable"></table>
-        </div>`;
-      document.body.appendChild(m);
-      return m;
-  })();
-
-  const closeBtn = modal.querySelector('.modalClose');
-  closeBtn.onclick = () => closeModal();
-
-  const playBtn = modal.querySelector('#modalSound');
-  playBtn.onclick = () => playSound();
-
-
-  const modalGlyph = document.getElementById('modalGlyph');
-  const modalText = document.getElementById('modalText');
-  const allophoneTable = document.getElementById('allophoneTable');
-  const modalLabel = document.getElementById('modalLabel');
-
-  //modal function with the number from the buttons
-  function openModal(entry) {
-    if (entry.text === "") return;
-    modalLabel.textContent = entry.name;
-    modalText.textContent = description(entry);
-    modalGlyph.textContent = entry.letter_glyph;
-    sound = entry.sound;
-    // Allophones
-    allophoneTable.innerHTML = "";
-    if (entry.allophones && Object.keys(entry.allophones).length > 0) {
-      allophoneTable.style.display = "table";
-
-      const header = document.createElement("tr");
-      ["Allophone", "Condition"].forEach(text => {
-        const th = document.createElement("th");
-        th.textContent = text;
-        header.appendChild(th);
-      });
-      allophoneTable.appendChild(header);
-
-      for (const symbol in entry.allophones) {
-        const tr = document.createElement("tr");
-        const tdSymbol = document.createElement("td");
-        tdSymbol.textContent = symbol;
-        const tdCond = document.createElement("td");
-        tdCond.textContent = entry.allophones[symbol];
-        tr.appendChild(tdSymbol);
-        tr.appendChild(tdCond);
-        allophoneTable.appendChild(tr);
-      }
-    } else {
-      allophoneTable.style.display = "none";
-    }
-
-    modal.style.display = "flex";
-  }
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeModal();
-  });
-
-  window.addEventListener("click", e => {
-    if (e.target === modal) closeModal();
-  });
-  console.log("Generated alphabet table")
-  
-  console.log(modal)
-  console.log(table)
-
-  openModal()
-}
-
 gednder_overrides = {
     "animates": ["e", "r", "mon", "i"],
     "animate": ["e", "r", "mon", "i"], // AAAAAAAAAA INCONSISTANT
@@ -904,7 +734,7 @@ function connect_split(prefix = "", text = "", suffix = "") {
     let suffix_entries = text_to_entries(suffix);
     if (!text_entries) return []; 
     const last_text = text_entries[text_entries.length - 1];
-    const first_text = text_entries[0];
+    // const first_text = text_entries[0];
 
     if (prefix_entries) {
         // No rules?
@@ -964,7 +794,6 @@ const functions = {
   get_entry_by_rom,
   get_entry_by_glyph,
   get_entry_by_discord,
-  generate_alphabet,
   description
 };
 
