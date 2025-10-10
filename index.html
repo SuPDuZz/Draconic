@@ -9,7 +9,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="./css/index.css?v=1" />
   <link rel="stylesheet" href="./shared/shared.css" />
-  <link rel="stylesheet" href="./shared/alphabet.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,8 +32,15 @@
       </p>
     </div>
 
-    <div class="alphabet-wrapper">
-      <table id="alphabet" func="generate_alphabet"></table>
+    <div style="display: flex; justify-content: center; align-items: flex-start;">
+      <iframe 
+        id="alphabet_iframe" 
+        src="./shared/alphabet/alphabet.html" 
+        frameborder="0" 
+        title="Draconic Alphabet" 
+        style="border:0; overflow:hidden;"
+        onload="this.style.height=this.contentWindow.document.body.scrollHeight+'px'; this.style.width=this.contentWindow.document.body.scrollWidth+'px';">
+      </iframe>
     </div>
 
     <div id="lessons">
