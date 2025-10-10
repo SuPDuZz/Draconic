@@ -1,14 +1,9 @@
 @font-face {
   font-family: "SegoeUIDrac";
-  src: url("../assets/fonts/SegoeUIDrac.ttf") format("truetype");
+  src: url("/assets/fonts/SegoeUIDrac.ttf") format("truetype");
 }
 
 /*alphabet table styling*/
-.alphabet-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 #alphabet {
   border-collapse: collapse;
   table-layout: fixed;
