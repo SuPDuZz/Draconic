@@ -4,26 +4,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Draconic Alphabet</title>
-        <link rel="stylesheet" href="/shared/alphabet/alphabet.css">
+        <link rel="stylesheet" href="./alphabet.css">
     </head>
     <body>
-        <table id="alphabet"></table>
-
+        <div style="display: flex; justify-content: center; align-items: flex-start;">
+            <table id="alphabet"></table>
+        </div>
         <div id="modal" class="modalWrap">
             <div class="modalContent">
                 <button class="modalClose">&times;</button>
                 <div class="horisontalAlign">
-                <p id="modalGlyph" class="glyph"></p>
-                <div class="verticalAlign">
-                    <p id="modalLabel">Label.</p>
-                    <p id="modalText">Placeholder text for this grid square.</p>
-                    <button id="modalSound">Play Sound</button>
-                </div>
+                    <p id="modalGlyph" class="glyph"></p>
+                    <div class="verticalAlign">
+                        <p id="modalLabel">Label.</p>
+                        <p id="modalText">Placeholder text for this grid square.</p>
+                        <button id="modalSound">Play Sound</button>
+                    </div>
                 </div>
                 <table id="allophoneTable"></table>
             </div>
         </div>
     </body>
-    <script src="/js/alphabetMap.js"></script>
-    <script src="/shared/alphabet/alphabet.js"></script>
+    <script src="../../js/alphabetMap.js"></script>
+    <script src="./alphabet.js"></script>
 </html>

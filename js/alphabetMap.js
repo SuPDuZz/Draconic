@@ -449,7 +449,7 @@ window.alphabetMap = [
   { // 46
     name: 'q̇em',  name_ipa: "/ʡem/",
     letter: "", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE029", letter_discord: ":Qem:",
-    text: `{name} pronounced {name_ipa}, unlike most of the other symbols, this one doesn't have a direct translation to a romanized way of writing. \n
+    text: `pronounced {name_ipa}, unlike most of the other symbols, this one doesn't have a direct translation to a romanized way of writing. \n
     In draconic the symbol has three different uses, it can be used as a rough equivelent of a hyphen, which means it can be optionally used to connect compounds or conjoin propositions to their nouns.\n
     It can also stand in for the number 0, or proceed a string of letters to indicate that they are numbers.\n
     In shorthand writing, it can also stand in for the word q̇e that means 'none'`,
@@ -459,7 +459,7 @@ window.alphabetMap = [
   { // 47
     name: 'seleŋ',  name_ipa: "/s̠el̪eŋ/",
     letter: "", letter_rom: [""], letter_ipa: "", letter_glyph: "\uE02a", letter_discord: ":seleng:",
-    text: `{name} pronounced {name_ipa}, unlike most of the other symbols, this one doesn't have a direct translation to a romanized way of writing. \n
+    text: `pronounced {name_ipa}, unlike most of the other symbols, this one doesn't have a direct translation to a romanized way of writing. \n
     It can however be used as a rough equivalent of a quotation mark or an asterisk. It can optionally be used to mark parentheticals, quotes, proper nouns, or even just for emphasis. \n
     Though it is seldom used in formal writing.`,
     properties: [window.REG.DIFFERENT],
@@ -485,7 +485,7 @@ window.alphabetMap = [
   { // 49
     name: ' ',  name_ipa: "",
     letter: " ", letter_rom: [" "], letter_ipa: "", letter_glyph: " ", letter_discord: "   ",
-    text: "uhh well uhhhhhhhhhhhhhhhhhhhhhh",
+    text: "SPACEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
     properties: [window.REG.SHEET_IGNORE],
   }
 ];
@@ -550,7 +550,6 @@ function entries_from_field(text, fieldNames, filter_brackets = false) {
               match._advance = advance;
               match._isParenthesized = true;
               
-              const currentBestLength = bestValLen;
               const isBetter = valLen > bestValLen || 
                              (valLen === bestValLen && advance > bestAdvance) ||
                              (valLen === bestValLen && bestIsParenthesized === false);
@@ -588,6 +587,9 @@ function entries_from_field(text, fieldNames, filter_brackets = false) {
   return result;
 }
 
+function any_text_to_entries(text) {
+  return entries_from_field(text, ["letter", "letter_rom", "letter_discord", "letter_glyph"]);
+}
 
 function text_to_entries(text) {
   return entries_from_field(text, ["letter", "letter_rom"]);

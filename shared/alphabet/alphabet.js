@@ -129,6 +129,8 @@ window.addEventListener("click", e => {
     if (e.target === modal) closeModal();
 });
 
+
+closeModal();
 generate_alphabet();
 // <iframe src="https://supduzz.github.io/Draconic/shared/alphabet/alphabet.html"></iframe>
 
@@ -139,6 +141,6 @@ generate_alphabet();
 //     frameborder="0" 
 //     title="Draconic Alphabet" 
 //     style="border:0; overflow:hidden;"
-//     onload="this.style.height=this.contentWindow.document.body.scrollHeight+'px'; this.style.width=this.contentWindow.document.body.scrollWidth+'px';">
+//     onload="this.style.height=this.contentWindow.document.body.scrollHeight+10+'px'; this.style.width=this.contentWindow.document.body.scrollWidth+10+'px';">
 //     </iframe>
 // </div>
