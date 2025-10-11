@@ -53,7 +53,7 @@ fetch("../assets/nouns.xlsx") //i dont fucking know how this works, glory to cha
   })
   .catch(console.error);
 
-
+const numbers = ["singular", "dual", "plural"];
 
 function random_noun() {
     const declension = 1+Math.floor(Math.random() * 4);
@@ -61,7 +61,6 @@ function random_noun() {
     const wordKeys = Object.keys(nounsMap[declension]);
     const word = wordKeys[Math.floor(Math.random() * wordKeys.length)];
     
-    const numbers = ["singular", "dual", "plural"];
     const number = numbers[Math.floor(Math.random() * numbers.length)];
 
     const genders = Object.keys(nounsMap[declension][word])
