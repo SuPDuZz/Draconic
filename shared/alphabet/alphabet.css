@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SegoeUIDrac";
-  src: url("https://supduzz.github.io/Draconic/assets/fonts/SegoeUIDrac.ttf") format("truetype");
+  src: url("https://liroxdeyamon.github.io/DraconicAPIs/font/SegoeUIDrac.ttf") format("truetype");
 }
 
 /*alphabet table styling*/
@@ -52,17 +52,27 @@ td.glyph span { /*styles the glyphs inside of every span of the alphabet table*/
   margin-top: 10px;
 }
 .horisontalAlign > .glyph { /*styles only the glyph inside horizontal Align*/
-  background-color: #EECECD;
-  border: 1px solid black;
   padding: 10px;
   font-size: 120px;
   line-height: 110px;
 }
-.glyph {/*styles eventual future glyphs*/
+
+.glyphWrapper {
+  display: flex;
+  align-items: flex-start;
+  background-color: #EECECD;
+  border: 1px solid black;
+}
+
+.glyph {
   font-family: "SegoeUIDrac", sans-serif;
   color: #AC272B;
-  text-align: center;
+  font-size: 120px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
+
 
 /*vertical align is the div that wraps the name text and sound button of the modal*/
 .verticalAlign {
@@ -88,6 +98,7 @@ td.glyph span { /*styles the glyphs inside of every span of the alphabet table*/
 #allophoneTable td,
 #allophoneTable th {
   border: 1px solid black;
+  padding-left: 10px;
 }
 
 #allophoneTable {

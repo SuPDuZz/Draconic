@@ -1,9 +1,9 @@
 function chunk(data, size = 6) {
     // Breaks data into chunks of given size, filtering out ignored entries
-    const filtered = data.filter(e => e && (!e.properties ||
-        (Array.isArray(e.properties)
-        ? !e.properties.includes(window.REG.SHEET_IGNORE)
-        : !e.properties[window.REG.SHEET_IGNORE])
+    const filtered = data.filter(e => e && (!e.prop ||
+        (Array.isArray(e.prop)
+        ? !e.prop.includes(REG.SHEET_IGNORE)
+        : !e.prop[REG.SHEET_IGNORE])
     ));
     return Array.from({ length: Math.ceil(filtered.length / size) },
         (_, i) => filtered.slice(i * size, (i + 1) * size));
@@ -67,7 +67,8 @@ function generate_alphabet() {
 
     console.log("Generating alphabet table")
 
-    const rows = chunk(window.alphabetMap, 6);
+    const rows = chunk(CHARACTERS, 6);
+    console.log(rows)
 
     rows.forEach(row => {
         const trNames = document.createElement('tr');
@@ -75,7 +76,7 @@ function generate_alphabet() {
 
         row.forEach(entry => {
             const tdName = document.createElement('td');
-            tdName.textContent = entry.properties.includes(window.REG.DIFFERENT) ? `${entry.name}` : `${entry.letter} - ${entry.name}`;
+            tdName.textContent = entry.prop.includes(REG.DIFFERENT) ? `${entry.name}` : `${entry.letter} - ${entry.name}`;
 
             const tdGlyph = document.createElement('td');
             tdGlyph.classList.add('glyph');
