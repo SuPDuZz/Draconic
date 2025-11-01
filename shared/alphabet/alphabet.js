@@ -67,8 +67,7 @@ function generate_alphabet() {
 
     console.log("Generating alphabet table")
 
-    const rows = chunk(CHARACTERS, 6);
-    console.log(rows)
+    const rows = chunk(CHARACTERS.FLAT, 6);
 
     rows.forEach(row => {
         const trNames = document.createElement('tr');
@@ -145,3 +144,4 @@ generate_alphabet();
 //     onload="this.style.height=this.contentWindow.document.body.scrollHeight+10+'px'; this.style.width=this.contentWindow.document.body.scrollWidth+10+'px';">
 //     </iframe>
 // </div>
+// outdated ^^^
