@@ -93,10 +93,10 @@ function generate_alphabet() {
             trGlyphs.appendChild(tdGlyph);
 
             setTimeout(() => {
-                const scaleExtra = entry.table_prop?.size || 1;
-                const xOffset = entry.table_prop?.xoffset || 0;
-                const yOffset = entry.table_prop?.yoffset || 0;
-                span.style.transform = `scale(${scaleExtra}) translateX(${xOffset}px) translateY(${yOffset}px)`;
+                const scaleExtra = entry.table_prop["size"] || 1.3
+                const yOffset = -15
+                const xOffset = entry.table_prop["xoffset"] || 0
+                span.style.transform = `scale(${scaleExtra}) translateY(${yOffset}px) translateX(${xOffset}px)`;
             });
         });
 

@@ -13,6 +13,7 @@
   background: #D16D6A;
   height: 25px;
   line-height: 25px;
+  font-size: 14px;
   font-weight: bolder;
   text-align: center;
   vertical-align: middle;
@@ -57,21 +58,21 @@ td.glyph span { /*styles the glyphs inside of every span of the alphabet table*/
   line-height: 110px;
 }
 
-.glyphWrapper {
-  display: flex;
-  align-items: flex-start;
-  background-color: #EECECD;
-  border: 1px solid black;
-}
-
 .glyph {
   font-family: "SegoeUIDrac", sans-serif;
-  color: #AC272B;
-  font-size: 120px;
-  line-height: 1;
+  color: #C01D2E;
+  line-height: 50px;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
+
+td.glyph {
+  height: 100px;
+  text-align: center;
+  padding: 0;
+}
+
 
 
 /*vertical align is the div that wraps the name text and sound button of the modal*/
