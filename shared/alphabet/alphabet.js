@@ -2,8 +2,8 @@ function chunk(data, size = 6) {
     // Breaks data into chunks of given size, filtering out ignored entries
     const filtered = data.filter(e => e && (!e.prop ||
         (Array.isArray(e.prop)
-        ? !e.prop.includes(REG.SHEET_IGNORE)
-        : !e.prop[REG.SHEET_IGNORE])
+        ? !e.prop.includes(IDS.CHARACTERS.SHEET_IGNORE)
+        : !e.prop[IDS.CHARACTERS.SHEET_IGNORE])
     ));
     return Array.from({ length: Math.ceil(filtered.length / size) },
         (_, i) => filtered.slice(i * size, (i + 1) * size));
@@ -75,7 +75,7 @@ function generate_alphabet() {
 
         row.forEach(entry => {
             const tdName = document.createElement('td');
-            tdName.textContent = entry.prop.includes(REG.DIFFERENT) ? `${entry.name}` : `${entry.letter} - ${entry.name}`;
+            tdName.textContent = entry.prop.includes(IDS.CHARACTERS.DIFFERENT) ? `${entry.name}` : `${entry.letter} - ${entry.name}`;
 
             const tdGlyph = document.createElement('td');
             tdGlyph.classList.add('glyph');
@@ -106,32 +106,36 @@ function generate_alphabet() {
     console.log("Generated alphabet table");
 }
 
-// MODAL
-const modal = document.getElementById('modal');
-const modalGlyph = document.getElementById('modalGlyph');
-const modalText = document.getElementById('modalText');
-const allophoneTable = document.getElementById('allophoneTable');
-const modalLabel = document.getElementById('modalLabel');
+document.addEventListener("DraconicLoaded", e => {
+    // MODAL
+    const modal = document.getElementById('modal');
+    const modalGlyph = document.getElementById('modalGlyph');
+    const modalText = document.getElementById('modalText');
+    const allophoneTable = document.getElementById('allophoneTable');
+    const modalLabel = document.getElementById('modalLabel');
 
 
-// EVENTS
-const closeBtn = modal.querySelector('.modalClose');
-closeBtn.onclick = () => closeModal();
+    // EVENTS
+    const closeBtn = modal.querySelector('.modalClose');
+    closeBtn.onclick = () => closeModal();
 
-const playBtn = modal.querySelector('#modalSound');
-playBtn.onclick = () => playSound();
+    const playBtn = modal.querySelector('#modalSound');
+    playBtn.onclick = () => playSound();
 
-document.addEventListener("keydown", e => {
-if (e.key === "Escape") closeModal();
-});
+    document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeModal();
+    });
 
-window.addEventListener("click", e => {
-    if (e.target === modal) closeModal();
-});
+    window.addEventListener("click", e => {
+        if (e.target === modal) closeModal();
+    });
 
 
-closeModal();
-generate_alphabet();
+    closeModal();
+    generate_alphabet();
+})
+
+
 // <iframe src="https://supduzz.github.io/Draconic/shared/alphabet/alphabet.html"></iframe>
 
 // <div style="display: flex; justify-content: center; align-items: flex-start;">

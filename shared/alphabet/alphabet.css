@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "SegoeUIDrac";
-  src: url("https://liroxdeyamon.github.io/DraconicAPIs/font/SegoeUIDrac.ttf") format("truetype");
+  font-family: "Draconic";
+  src: url("https://draconicconlang.github.io/APIs/dialects/dr_dr/assets/font/font.ttf") format("truetype");
 }
 
 /*alphabet table styling*/
@@ -59,7 +59,7 @@ td.glyph span { /*styles the glyphs inside of every span of the alphabet table*/
 }
 
 .glyph {
-  font-family: "SegoeUIDrac", sans-serif;
+  font-family: "Draconic", sans-serif;
   color: #C01D2E;
   line-height: 50px;
   overflow: hidden;
